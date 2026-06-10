@@ -1,0 +1,15 @@
+node_modules/
+.docusaurus/
+build/
+.DS_Store
+*.log
+
+# Capture toolkit artifacts — large binaries not committed
+capture/output/
+capture/.state/
+capture/*.bak
+*.bak
+
+# Local env
+.env
+.env.local
