@@ -13,7 +13,7 @@ const config: Config = {
   trailingSlash: false,
   baseUrl: '/',
 
-  organizationName: 'thewahda',
+  organizationName: 'thewahdaa',
   projectName: 'docs',
 
   onBrokenLinks: 'warn',
