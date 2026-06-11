@@ -77,46 +77,7 @@ const config: Config = {
         },
       ],
     },
-    footer: {
-      style: 'light',
-      links: [
-        {
-          title: ' ',
-          items: [
-            {
-              html: '<div class="footer-brand">'
-                  + '<img src="/img/brand/logo.svg" alt="The Wahda Cloud" />'
-                  + '<p>Pay-as-you-go cloud infrastructure built for India. IaaS, Managed Kubernetes, DBaaS.</p>'
-                  + '</div>',
-            },
-          ],
-        },
-        {
-          title: 'Docs',
-          items: [
-            { label: 'Getting started', to: '/getting-started/overview' },
-            { label: 'Compute', to: '/compute/create-vm' },
-            { label: 'Databases', to: '/databases/overview' },
-          ],
-        },
-        {
-          title: 'Product',
-          items: [
-            { label: 'Console', href: 'https://console.thewahda.com' },
-            { label: 'Pricing', href: 'https://thewahda.com/en/pricing' },
-            { label: 'Status', href: 'https://thewahda.com/en/status' },
-          ],
-        },
-        {
-          title: 'Company',
-          items: [
-            { label: 'About', href: 'https://thewahda.com/en/about' },
-            { label: 'Contact', href: 'https://thewahda.com/en/contact' },
-          ],
-        },
-      ],
-      copyright: `© ${new Date().getFullYear()} The Wahda Cloud. Hyderabad, India.`,
-    },
+    footer: undefined as any,
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
