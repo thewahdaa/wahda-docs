@@ -66,7 +66,7 @@ const config: Config = {
           label: 'Docs',
         },
         {
-          href: 'https://api.thewahda.com',
+          href: 'https://console.thewahda.com',
           label: 'Console',
           position: 'right',
         },
@@ -78,7 +78,7 @@ const config: Config = {
       ],
     },
     footer: {
-      style: 'dark',
+      style: 'light',
       links: [
         {
           title: 'Docs',
@@ -91,7 +91,7 @@ const config: Config = {
         {
           title: 'Product',
           items: [
-            { label: 'Console', href: 'https://api.thewahda.com' },
+            { label: 'Console', href: 'https://console.thewahda.com' },
             { label: 'Pricing', href: 'https://thewahda.com/en/pricing' },
             { label: 'Status', href: 'https://thewahda.com/en/status' },
           ],

@@ -392,3 +392,51 @@ code {
 .navbar__brand .navbar__title {
   display: none;
 }
+
+
+/* === Footer styled like thewahda.com (bg-muted/50 + border-t) === */
+.footer--light {
+  background: #f8fafc;            /* slate-50 (matches bg-muted/50 ish) */
+  border-top: 1px solid #e2e8f0;  /* slate-200 (border-border) */
+  color: #475569;                  /* slate-600 (muted-foreground) */
+  padding: 4rem 0 3rem;
+}
+.footer--light .footer__title {
+  color: #0f172a;                  /* slate-900 (foreground) */
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+.footer--light .footer__item a,
+.footer--light .footer__link-item {
+  color: #475569;
+  font-size: 0.875rem;
+  transition: color 0.15s;
+}
+.footer--light .footer__item a:hover,
+.footer--light .footer__link-item:hover {
+  color: #0f172a;
+  text-decoration: none;
+}
+.footer--light .footer__copyright {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 0.875rem;
+  text-align: left;
+}
+[data-theme='dark'] .footer--light {
+  background: #0f172a;
+  border-top-color: #1e293b;
+  color: #94a3b8;
+}
+[data-theme='dark'] .footer--light .footer__title { color: #f1f5f9; }
+[data-theme='dark'] .footer--light .footer__item a,
+[data-theme='dark'] .footer--light .footer__link-item { color: #94a3b8; }
+[data-theme='dark'] .footer--light .footer__item a:hover,
+[data-theme='dark'] .footer--light .footer__link-item:hover { color: #f1f5f9; }
+[data-theme='dark'] .footer--light .footer__copyright {
+  border-top-color: #1e293b;
+  color: #94a3b8;
+}
