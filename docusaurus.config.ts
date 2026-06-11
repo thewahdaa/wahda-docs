@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'The Wahda Cloud',
   tagline: 'Documentation for builders on India\'s pay-as-you-go cloud.',
-  favicon: 'img/brand/favicon.ico',
+  favicon: 'img/brand/favicon.svg',
 
   future: { v4: true },
 
