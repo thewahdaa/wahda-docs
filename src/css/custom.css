@@ -440,3 +440,25 @@ code {
   border-top-color: #1e293b;
   color: #94a3b8;
 }
+
+
+/* Footer brand column (logo + tagline) */
+.footer-brand img {
+  height: 28px;
+  width: auto;
+  display: block;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+.footer-brand p {
+  font-size: 0.875rem;
+  color: #475569;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 260px;
+}
+[data-theme='dark'] .footer-brand p { color: #94a3b8; }
+.footer__col:first-child .footer__title { display: none; }

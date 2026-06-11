@@ -81,6 +81,17 @@ const config: Config = {
       style: 'light',
       links: [
         {
+          title: ' ',
+          items: [
+            {
+              html: '<div class="footer-brand">'
+                  + '<img src="/img/brand/logo.svg" alt="The Wahda Cloud" />'
+                  + '<p>Pay-as-you-go cloud infrastructure built for India. IaaS, Managed Kubernetes, DBaaS.</p>'
+                  + '</div>',
+            },
+          ],
+        },
+        {
           title: 'Docs',
           items: [
             { label: 'Getting started', to: '/getting-started/overview' },
