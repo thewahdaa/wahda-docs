@@ -5,7 +5,7 @@ description: Launch your first Linux VM on The Wahda Cloud in about five minutes
 
 # Create a virtual machine
 
-Spin up a Linux virtual machine from the console in about five minutes. This page walks the **Create Instance** wizard end-to-end — sizing, OS, storage, network, access — one screen per step.
+Spin up a Linux virtual machine from the console in about five minutes. This page walks the **Create Instance** wizard end-to-end — sizing, OS, storage, network, access.
 
 > **Before you start**
 > - An account on [console.thewahda.com](https://console.thewahda.com) — see [Sign up & first login →](/getting-started/sign-up).
@@ -29,18 +29,11 @@ Spin up a Linux virtual machine from the console in about five minutes. This pag
 
 ---
 
-## 1. Open the Instances list
+## 1. Open the wizard
 
-From the left navigation: **Compute → Instances**. The list shows every VM in the current project — empty if this is your first one.
+From the left navigation: **Compute → Instances**. The list shows every VM in the current project.
 
-Click **Create** in the top-right.
-
-<MacFrame
-  src="/img/screenshots/compute/create-vm/01-instances-list.png"
-  alt="Empty Instances list with the Create button in the top-right"
-  title="Skyline — Compute › Instances"
-  caption="The Instances page. Click Create to launch the wizard."
-/>
+Click **Create Instance** in the top-left of the table.
 
 ---
 
@@ -50,12 +43,12 @@ The longest step of the wizard. You're picking the physical shape of the VM here
 
 <MacFrame
   src="/img/screenshots/compute/create-vm/02-step1-base-config.png"
-  alt="Step 1 of the Create Instance wizard, fully filled in"
+  alt="Step 1 of the Create Instance wizard — Base Config"
   title="Create Instance — Step 1 · Base Config"
-  caption="Step 1 filled: AZ, m1.small flavor, Ubuntu image, 20 GB SSD-GP1 root disk."
+  caption="Step 1 shows a stepper across the top (Base Config → Network Config → System Config → Confirm Config) and the live Quota panel on the right."
 />
 
-Fill it in top to bottom:
+Fill it in top to bottom.
 
 ### a) Available Zone
 
@@ -63,7 +56,7 @@ Leave the default (e.g. `in-north-az1`). Pick a specific AZ only if you need to 
 
 ### b) Specification (flavor)
 
-Each row is a pre-defined size — vCPU, memory, included internal-network bandwidth. Click the radio on the row to select it. The **Selected** chip below the table reflects your pick, and the **Quota** sidebar on the right updates live.
+Each row is a pre-defined size — vCPU, memory, included internal-network bandwidth. Click the radio on the row to select it. The **Selected** chip below the table reflects your pick, and the **Quota** panel on the right updates live.
 
 For a first VM, **`m1.small` (1 vCPU / 2 GB RAM)** is a good starting point.
 
@@ -103,13 +96,6 @@ Click **Next: Network Config**.
 
 Attach the VM to a **private network** inside your project. Tick the checkbox on the network row; the subnet auto-selects from the network's first subnet.
 
-<MacFrame
-  src="/img/screenshots/compute/create-vm/06-step2-network-selected.png"
-  alt="Step 2 of the wizard — a private network selected and a security group attached"
-  title="Create Instance — Step 2 · Network Config"
-  caption="Step 2: private network picked, security group attached."
-/>
-
 | Field | What to choose |
 |---|---|
 | **Network** | A private network inside your project. Most projects come with a `private` network created automatically. |
@@ -123,13 +109,6 @@ Click **Next: System Config**.
 ## 4. Step 3 — System Config
 
 Give the VM a name and pick how you'll log in.
-
-<MacFrame
-  src="/img/screenshots/compute/create-vm/07-step3-system-config.png"
-  alt="Step 3 of the wizard — instance name, key pair, and optional cloud-init user data"
-  title="Create Instance — Step 3 · System Config"
-  caption="Step 3: hostname, key-pair login, optional cloud-init user data."
-/>
 
 | Field | What to enter |
 |---|---|
@@ -150,25 +129,11 @@ Click **Next: Confirm Config**.
 
 Review every choice from the previous three steps. Look for typos in the name, the right OS image, the right network. Anything wrong → **Previous** to fix. Everything good → **Create**.
 
-<MacFrame
-  src="/img/screenshots/compute/create-vm/08-step4-confirm.png"
-  alt="Step 4 of the wizard — the confirm-config summary screen"
-  title="Create Instance — Step 4 · Confirm Config"
-  caption="Step 4: summary of everything you configured. Last chance to correct anything."
-/>
-
 ---
 
 ## 6. Wait for the VM to come up
 
 The wizard closes and your VM appears in the Instances list. Its status moves through **Building → Active**. Initialization usually takes 30–90 seconds.
-
-<MacFrame
-  src="/img/screenshots/compute/create-vm/11-returned.png"
-  alt="Instances list showing the newly created VM in Active state"
-  title="Skyline — Compute › Instances"
-  caption="Back on the Instances list, VM in Active state and ready to log in to."
-/>
 
 When status is **Active**, copy the VM's **IP Address** from the list.
 
