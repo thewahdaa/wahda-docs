@@ -125,6 +125,14 @@ body {
   font-weight: 700;
   letter-spacing: -0.01em;
 }
+/* Hide Docusaurus' default external-link glyph in the top navbar.
+   The stock icon looks dated; the "Console" and "thewahda.com" items
+   are self-evidently external. Keep it in body content where the
+   affordance is genuinely useful. */
+.navbar__items [class*='iconExternalLink'],
+.navbar__items--right [class*='iconExternalLink'] {
+  display: none;
+}
 
 /* === Headings === */
 h1, h2, h3, h4 {
