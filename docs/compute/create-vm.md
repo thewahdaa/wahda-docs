@@ -5,7 +5,7 @@ description: Launch your first Linux VM on The Wahda Cloud in about five minutes
 
 # Create a virtual machine
 
-Spin up a Linux virtual machine from the console in about five minutes. This page walks the **Create Instance** wizard end-to-end — sizing, OS, storage, network, access.
+Spin up a Linux virtual machine from the console in about five minutes. This page walks the **Create Instance** wizard end-to-end — sizing, OS, storage, network, access — one screen per step.
 
 > **Before you start**
 > - An account on [console.thewahda.com](https://console.thewahda.com) — see [Sign up & first login →](/getting-started/sign-up).
@@ -33,19 +33,26 @@ Spin up a Linux virtual machine from the console in about five minutes. This pag
 
 From the left navigation: **Compute → Instances**. The list shows every VM in the current project.
 
+<MacFrame
+  src="/img/screenshots/compute/create-vm/01-instances-list.png"
+  alt="Compute › Instances list with the Create Instance button in the top-left"
+  title="Skyline — Compute › Instances"
+  caption="Click Create Instance to launch the wizard."
+/>
+
 Click **Create Instance** in the top-left of the table.
 
 ---
 
 ## 2. Step 1 — Base Config
 
-The longest step of the wizard. You're picking the physical shape of the VM here: zone, size, OS image, and root disk.
+The longest step of the wizard. You're picking the physical shape of the VM: zone, size, OS image, and root disk. The stepper at the top always shows where you are; the Quota panel on the right updates live as you make choices.
 
 <MacFrame
-  src="/img/screenshots/compute/create-vm/02-step1-base-config.png"
-  alt="Step 1 of the Create Instance wizard — Base Config"
-  title="Create Instance — Step 1 · Base Config"
-  caption="Step 1 shows a stepper across the top (Base Config → Network Config → System Config → Confirm Config) and the live Quota panel on the right."
+  src="/img/screenshots/compute/create-vm/02-step1-empty.png"
+  alt="Step 1 of the Create Instance wizard — empty Base Config form"
+  title="Create Instance — Step 1 · Base Config (empty)"
+  caption="Fresh Step 1: stepper at top, quota panel on the right, form waiting to be filled."
 />
 
 Fill it in top to bottom.
@@ -56,7 +63,7 @@ Leave the default (e.g. `in-north-az1`). Pick a specific AZ only if you need to 
 
 ### b) Specification (flavor)
 
-Each row is a pre-defined size — vCPU, memory, included internal-network bandwidth. Click the radio on the row to select it. The **Selected** chip below the table reflects your pick, and the **Quota** panel on the right updates live.
+Each row is a pre-defined size — vCPU, memory, included internal-network bandwidth. Click the radio on the row to select it. The **Selected** chip below the table reflects your pick.
 
 For a first VM, **`m1.small` (1 vCPU / 2 GB RAM)** is a good starting point.
 
@@ -88,18 +95,43 @@ Name, Project, System Version — any cell selects the image. The blue radio dot
 | **Data Disk** *(optional)* | Click **Add Data Disks** for additional persistent volumes. |
 | **Count** | `1` — bump higher to launch identical copies of this configuration. |
 
+When everything is filled you'll see the whole step summarized like this — flavor selected, image selected, disk type + size set — and the **Next: Network Config** button lights up in the bottom-right:
+
+<MacFrame
+  src="/img/screenshots/compute/create-vm/03-step1-filled.png"
+  alt="Step 1 filled — flavor, Ubuntu image, and 20 GB SSD-GP1 root disk"
+  title="Create Instance — Step 1 · Base Config (filled)"
+  caption="m1.small + Ubuntu 22.04 LTS + SSD-GP1 20 GiB. Next: Network Config is active."
+/>
+
 Click **Next: Network Config**.
 
 ---
 
 ## 3. Step 2 — Network Config
 
-Attach the VM to a **private network** inside your project. Tick the checkbox on the network row; the subnet auto-selects from the network's first subnet.
+Attach the VM to a **private network** inside your project. On landing you see the empty form with tabs for Current Project / Shared / External / All networks and the Security Group section further down.
+
+<MacFrame
+  src="/img/screenshots/compute/create-vm/04-step2-empty.png"
+  alt="Step 2 of the wizard — empty Network Config form"
+  title="Create Instance — Step 2 · Network Config (empty)"
+  caption="Step 2 landing. Pick one network row, then attach a security group below."
+/>
+
+Tick the checkbox on the network row you want; the subnet auto-selects from the network's first subnet.
+
+<MacFrame
+  src="/img/screenshots/compute/create-vm/05-step2-selected.png"
+  alt="Step 2 with a network selected — demo-network-vpc row checked"
+  title="Create Instance — Step 2 · Network Config (selected)"
+  caption="Network selected. Virtual LAN is automatically assigned; scroll down to tick a security group."
+/>
 
 | Field | What to choose |
 |---|---|
-| **Network** | A private network inside your project. Most projects come with a `private` network created automatically. |
-| **Subnet** | Inherited from the network's first subnet — change only if you have multiple. |
+| **Network** | A private network inside your project. Most projects come with a `demo-network-vpc` created automatically. |
+| **Virtual LAN** | Inherited from the network's first subnet — change only if you have multiple. |
 | **Security Groups** | The firewall ruleset(s) attached to the VM. Defaults block all inbound traffic. **To SSH in, attach a group that allows port 22.** See [Security groups →](/networking/security-groups). |
 
 Click **Next: System Config**.
@@ -110,12 +142,19 @@ Click **Next: System Config**.
 
 Give the VM a name and pick how you'll log in.
 
+<MacFrame
+  src="/img/screenshots/compute/create-vm/06-step3-empty.png"
+  alt="Step 3 of the wizard — empty System Config form"
+  title="Create Instance — Step 3 · System Config"
+  caption="Step 3 lands empty: name, login type, and key-pair selection are all required."
+/>
+
 | Field | What to enter |
 |---|---|
-| **Instance Name** | A short hostname — letters, numbers, hyphens. Example: `web-01`. |
-| **Login Type** | **Key Pair** *(recommended)* or Password. Production VMs should always use key pairs. |
-| **Key Pair** | Pick an existing key pair from your project, or click **Create Key Pair** to generate one in the browser. |
-| **User Data** *(optional)* | A cloud-init script that runs on first boot — install packages, write config, create users. |
+| **Name** | A short hostname — letters, numbers, hyphens. Example: `web-01`. |
+| **Login Type** | **Keypair** *(recommended)* or Password. Production VMs should always use keypairs. |
+| **Keypair** | Pick an existing key pair from your project, or click **Create Keypair** to generate one right here. |
+| **Advanced Options** *(optional)* | Expand to add cloud-init user data — a script that runs on first boot to install packages, write config, or create users. |
 
 :::caution Download your key
 If you generate a new key pair in the browser, you're shown the **private key only once**. Download it and store it somewhere safe (a password manager works). Without it you can't SSH into the VM later.
