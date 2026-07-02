@@ -10,7 +10,6 @@ const sidebars: SidebarsConfig = {
         'getting-started/overview',
         'getting-started/sign-up',
         'getting-started/projects-and-quotas',
-        'getting-started/cli-setup',
       ],
     },
     {

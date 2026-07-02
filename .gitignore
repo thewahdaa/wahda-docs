@@ -13,3 +13,6 @@ capture/*.bak
 # Local env
 .env
 .env.local
+
+# Local frame-style previews (dev-only)
+preview/
