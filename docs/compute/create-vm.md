@@ -5,12 +5,12 @@ description: Launch your first Linux VM on The Wahda Cloud in about five minutes
 
 # Create a virtual machine
 
-Spin up a Linux virtual machine from the console in about five minutes. This page walks the **Create Instance** wizard end-to-end — sizing, OS, storage, network, access.
+Spin up a Linux virtual machine from the console in about five minutes. This page walks the **Create Instance** wizard end-to-end — sizing, OS, storage, network, access — one screen per step.
 
 > **Before you start**
-> - An account on [console.thewahda.com](https://console.thewahda.com)
-> - A project with available **instance**, **vCPU**, **memory**, and **volume** quota (the wizard shows you live quota usage on the right)
-> - An SSH public key (we'll create one in the wizard if you don't have one)
+> - An account on [console.thewahda.com](https://console.thewahda.com) — see [Sign up & first login →](/getting-started/sign-up).
+> - A project with available **instance**, **vCPU**, **memory**, and **volume** quota. The wizard shows live quota usage on the right as you build.
+> - An SSH public key. Don't have one? The wizard can generate one for you in Step 3.
 
 ---
 
@@ -29,39 +29,33 @@ Spin up a Linux virtual machine from the console in about five minutes. This pag
 
 ---
 
-## 1. Sign in
-
-Open [**console.thewahda.com**](https://console.thewahda.com) and sign in with your account.
-
-![Sign-in screen](/img/screenshots/compute/create-vm/01-login-page.png)
-
-After login you land on the project **Home** dashboard with a summary of your project, your role, and quotas in this region.
-
-![Home dashboard for the demo-project](/img/screenshots/compute/create-vm/03-dashboard.png)
-
-:::tip Switch project
-Use the project name in the top bar to jump between projects you have access to. Quotas are scoped per project.
-:::
-
----
-
-## 2. Go to Instances
+## 1. Open the Instances list
 
 From the left navigation: **Compute → Instances**. The list shows every VM in the current project — empty if this is your first one.
 
 Click **Create** in the top-right.
 
-![Empty Instances list with the Create button](/img/screenshots/compute/create-vm/01-instances-list.png)
+<MacFrame
+  src="/img/screenshots/compute/create-vm/01-instances-list.png"
+  alt="Empty Instances list with the Create button in the top-right"
+  title="Skyline — Compute › Instances"
+  caption="The Instances page. Click Create to launch the wizard."
+/>
 
 ---
 
-## 3. Step 1 — Base Config
+## 2. Step 1 — Base Config
 
-The longest step. You're picking the physical shape of the VM here.
+The longest step of the wizard. You're picking the physical shape of the VM here: zone, size, OS image, and root disk.
 
-![Step 1 — empty Base Config form](/img/screenshots/compute/create-vm/02-step1-empty.png)
+<MacFrame
+  src="/img/screenshots/compute/create-vm/02-step1-base-config.png"
+  alt="Step 1 of the Create Instance wizard, fully filled in"
+  title="Create Instance — Step 1 · Base Config"
+  caption="Step 1 filled: AZ, m1.small flavor, Ubuntu image, 20 GB SSD-GP1 root disk."
+/>
 
-Five required choices, top to bottom:
+Fill it in top to bottom:
 
 ### a) Available Zone
 
@@ -73,8 +67,6 @@ Each row is a pre-defined size — vCPU, memory, included internal-network bandw
 
 For a first VM, **`m1.small` (1 vCPU / 2 GB RAM)** is a good starting point.
 
-![Flavor selected: m1.small](/img/screenshots/compute/create-vm/03-step1-flavor.png)
-
 | Flavor (typical) | vCPU | RAM | Use case |
 |---|---|---|---|
 | `m1.tiny` | 2 | 512 MB | Trial / smallest workload |
@@ -84,69 +76,67 @@ For a first VM, **`m1.small` (1 vCPU / 2 GB RAM)** is a good starting point.
 
 ### c) Start Source & Operating System
 
-Leave **Start Source** on the default **Image** tab (the other tabs let you boot from an existing snapshot or volume).
+Leave **Start Source** on the default **Image** tab. The other tabs let you boot from an existing snapshot or volume.
 
-Under **Operating System**, click the OS family icon — **Ubuntu**, Debian, Fedora, Rocky, Windows, etc. The table below refreshes to show every available image for that family.
+Under **Operating System**, click the OS family icon — **Ubuntu**, Debian, Fedora, Rocky, Windows, etc. — then click the row of the image you want in the table below. We recommend the latest LTS for Linux.
 
-![Ubuntu OS family selected](/img/screenshots/compute/create-vm/04-step1-ubuntu.png)
-
-**Click the row** of the image you want (we recommend the latest LTS for Linux). The selection is confirmed by the **Selected Image** chip below.
-
-![Image picked from the catalog](/img/screenshots/compute/create-vm/05-step1-image.png)
-
-:::tip Image rows
-You can click anywhere on the row — Name, Project, System Version — to select the image. The blue radio dot on the left appears once selected.
+:::tip Click anywhere on the row
+Name, Project, System Version — any cell selects the image. The blue radio dot on the left appears once selected.
 :::
 
 ### d) System Disk
 
-Below the image table:
-
-![System Disk section — Type dropdown opened](/img/screenshots/compute/create-vm/07-step1-disk-type-open.png)
-
 | Field | Set it to |
 |---|---|
-| **Boot From Volume** | `Yes - Create a new system disk` (default). This gives the VM a persistent root disk. |
-| **System Disk → Type** | Pick `SSD-GP1` (general-purpose SSD) from the dropdown. |
-| **System Disk → Size** | At least **20 GiB**. The minimum is set by the image; the wizard rejects anything smaller. |
+| **Boot From Volume** | `Yes - Create a new system disk` *(default)*. Gives the VM a persistent root disk. |
+| **System Disk → Type** | `SSD-GP1` (general-purpose SSD). |
+| **System Disk → Size** | At least **20 GiB**. The image sets the minimum; the wizard rejects anything smaller. |
 | **Deleted with the instance** | Leave checked. Uncheck only if you want the root volume to survive instance deletion. |
-| **Data Disk** *(optional)* | Click **Add Data Disks** if you need additional persistent volumes. |
-| **Count** | `1` (use higher to launch identical copies of this configuration). |
+| **Data Disk** *(optional)* | Click **Add Data Disks** for additional persistent volumes. |
+| **Count** | `1` — bump higher to launch identical copies of this configuration. |
 
-![Disk type picked and size set](/img/screenshots/compute/create-vm/09-step1-disk-sized.png)
-
-### e) Advance to Step 2
-
-When all required fields have values, the **Next: Network Config** button in the footer becomes active. Click it.
-
-![Hovering Next: Network Config](/img/screenshots/compute/create-vm/10-step1-hover-next.png)
+Click **Next: Network Config**.
 
 ---
 
-## 4. Step 2 — Network Config
+## 3. Step 2 — Network Config
 
-Attach the VM to a **private network** inside your project. The wizard lists every network you have access to; pick one row by ticking its checkbox. The subnet is auto-selected from the network's available subnets.
+Attach the VM to a **private network** inside your project. Tick the checkbox on the network row; the subnet auto-selects from the network's first subnet.
+
+<MacFrame
+  src="/img/screenshots/compute/create-vm/06-step2-network-selected.png"
+  alt="Step 2 of the wizard — a private network selected and a security group attached"
+  title="Create Instance — Step 2 · Network Config"
+  caption="Step 2: private network picked, security group attached."
+/>
 
 | Field | What to choose |
 |---|---|
-| **Network** | A private network inside your project. Most projects have a `private` network created automatically. |
+| **Network** | A private network inside your project. Most projects come with a `private` network created automatically. |
 | **Subnet** | Inherited from the network's first subnet — change only if you have multiple. |
-| **Security Groups** | The firewall ruleset(s) attached to the VM. By default, all inbound traffic is blocked. To SSH in, you must attach a group that allows port 22. See [Security groups →](/networking/security-groups). |
+| **Security Groups** | The firewall ruleset(s) attached to the VM. Defaults block all inbound traffic. **To SSH in, attach a group that allows port 22.** See [Security groups →](/networking/security-groups). |
 
 Click **Next: System Config**.
 
 ---
 
-## 5. Step 3 — System Config
+## 4. Step 3 — System Config
 
-Set the VM's name and how you'll log in.
+Give the VM a name and pick how you'll log in.
+
+<MacFrame
+  src="/img/screenshots/compute/create-vm/07-step3-system-config.png"
+  alt="Step 3 of the wizard — instance name, key pair, and optional cloud-init user data"
+  title="Create Instance — Step 3 · System Config"
+  caption="Step 3: hostname, key-pair login, optional cloud-init user data."
+/>
 
 | Field | What to enter |
 |---|---|
 | **Instance Name** | A short hostname — letters, numbers, hyphens. Example: `web-01`. |
-| **Login Type** | **Key Pair** (recommended) or **Password**. Production VMs should always use key pairs. |
+| **Login Type** | **Key Pair** *(recommended)* or Password. Production VMs should always use key pairs. |
 | **Key Pair** | Pick an existing key pair from your project, or click **Create Key Pair** to generate one in the browser. |
-| **User Data** *(optional)* | A cloud-init script that runs on first boot — install packages, write config files, set up users. |
+| **User Data** *(optional)* | A cloud-init script that runs on first boot — install packages, write config, create users. |
 
 :::caution Download your key
 If you generate a new key pair in the browser, you're shown the **private key only once**. Download it and store it somewhere safe (a password manager works). Without it you can't SSH into the VM later.
@@ -156,23 +146,35 @@ Click **Next: Confirm Config**.
 
 ---
 
-## 6. Step 4 — Confirm Config
+## 5. Step 4 — Confirm Config
 
-Review every choice from the previous three steps. Look for typos in the name, the right OS image, the right network. Anything wrong, click **Previous** to fix; everything good, click **Create**.
+Review every choice from the previous three steps. Look for typos in the name, the right OS image, the right network. Anything wrong → **Previous** to fix. Everything good → **Create**.
+
+<MacFrame
+  src="/img/screenshots/compute/create-vm/08-step4-confirm.png"
+  alt="Step 4 of the wizard — the confirm-config summary screen"
+  title="Create Instance — Step 4 · Confirm Config"
+  caption="Step 4: summary of everything you configured. Last chance to correct anything."
+/>
 
 ---
 
-## 7. Wait for the VM to come up
+## 6. Wait for the VM to come up
 
-The wizard closes and your VM appears in the Instances list. The status moves through **Building → Active**. Initialization usually takes 30–90 seconds depending on the image.
+The wizard closes and your VM appears in the Instances list. Its status moves through **Building → Active**. Initialization usually takes 30–90 seconds.
 
-![Returned to the Instances list](/img/screenshots/compute/create-vm/11-returned.png)
+<MacFrame
+  src="/img/screenshots/compute/create-vm/11-returned.png"
+  alt="Instances list showing the newly created VM in Active state"
+  title="Skyline — Compute › Instances"
+  caption="Back on the Instances list, VM in Active state and ready to log in to."
+/>
 
 When status is **Active**, copy the VM's **IP Address** from the list.
 
 ---
 
-## 8. Connect
+## 7. Connect
 
 ```bash
 ssh -i ~/Downloads/my-key.pem ubuntu@<vm-ip>
