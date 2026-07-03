@@ -77,11 +77,11 @@ Three things to notice on this screen:
 
 1. **Project selector** (top bar) — the project you're currently working in. Every resource you create goes here.
 2. **Region selector** (top bar) — the region every action targets. Resources are region-scoped; switching region hides everything from the other region.
-3. **Quota tiles** — how much compute, storage, and networking is available in the current project. See [Projects & quotas →](/getting-started/projects-and-quotas).
+3. **Usage tiles** — compute, storage, and networking used vs. currently allocated in this project. See [Projects →](/getting-started/projects-and-quotas).
 
 ---
 
 ## Next steps
 
-- [Projects & quotas →](/getting-started/projects-and-quotas) — how much you can build, and how to grow it.
+- [Projects →](/getting-started/projects-and-quotas) — how projects group your resources and what to do when you need more room.
 - [Create your first VM →](/compute/create-vm) — the end-to-end walkthrough.

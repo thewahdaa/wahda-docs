@@ -48,7 +48,7 @@ Why it matters:
 - **Access control.** You grant a teammate access to a specific project, not the whole account.
 - **Billing.** Each project rolls up its own usage on the invoice.
 
-See [Projects & quotas →](/getting-started/projects-and-quotas) for how to create, switch, and size projects.
+See [Projects →](/getting-started/projects-and-quotas) for how to create, switch, and size projects.
 
 ---
 
@@ -95,5 +95,5 @@ Stopping an instance still bills the attached volumes; deleting the instance sto
 ## Next steps
 
 - [Sign up & first login →](/getting-started/sign-up) — create an account and log in.
-- [Projects & quotas →](/getting-started/projects-and-quotas) — how much you can build, and how to grow it.
+- [Projects →](/getting-started/projects-and-quotas) — how projects group your resources and what to do when you need more room.
 - [Create your first VM →](/compute/create-vm) — the fastest end-to-end walkthrough.

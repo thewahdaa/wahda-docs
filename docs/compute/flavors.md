@@ -30,7 +30,7 @@ Four public flavors ship on the platform today:
 
 Flavors don't have a dedicated Skyline page for tenants — you choose them inside the **Create Instance** wizard, at Step 1 · Base Config. Every visible row is a flavor, and the **Selected** chip below the table confirms your pick. See [Create a VM → Step 1 · Base Config](/compute/create-vm#2-step-1--base-config).
 
-The wizard's **Quota** panel on the right updates live as you pick — so you can see whether the flavor fits your remaining vCPU and memory budget.
+The wizard's usage panel on the right updates live as you pick — so you can see how the flavor fits your project's current compute allocation.
 
 ---
 
@@ -64,4 +64,4 @@ If your workload doesn't fit `m1.large`, email **`info@thewahda.com`** with the 
 
 - [Create a VM →](/compute/create-vm) — put a flavor to work.
 - [Images →](/compute/images) — the OS that will run on it.
-- [Projects & quotas →](/getting-started/projects-and-quotas) — how much of each flavor your project can boot at once.
+- [Projects →](/getting-started/projects-and-quotas) — how projects group your resources and what to do when you need more room.

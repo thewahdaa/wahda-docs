@@ -128,12 +128,6 @@ To rotate cleanly:
 
 ---
 
-## Quota
-
-The Key Pair panel on the right of the dialog shows your quota (default **100 per user**). If you consistently need more, ask the platform team.
-
----
-
 ## Next steps
 
 - [Create a VM →](/compute/create-vm) — pick your key pair in Step 3.

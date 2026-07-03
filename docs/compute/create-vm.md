@@ -9,7 +9,7 @@ Spin up a Linux virtual machine from the console in about five minutes. This pag
 
 > **Before you start**
 > - An account on [console.thewahda.com](https://console.thewahda.com) — see [Sign up & first login →](/getting-started/sign-up).
-> - A project with available **instance**, **vCPU**, **memory**, and **volume** quota. The wizard shows live quota usage on the right as you build.
+> - Enough room in the project for the VM. The wizard shows live usage of the project's compute and storage allocation on the right as you build; if you're bumping against it, [raise it →](/getting-started/projects-and-quotas#hit-a-soft-limit).
 > - An SSH public key. Don't have one? The wizard can generate one for you in Step 3.
 
 ---
@@ -46,13 +46,13 @@ Click **Create Instance** in the top-left of the table.
 
 ## 2. Step 1 — Base Config
 
-The longest step of the wizard. You're picking the physical shape of the VM: zone, size, OS image, and root disk. The stepper at the top always shows where you are; the Quota panel on the right updates live as you make choices.
+The longest step of the wizard. You're picking the physical shape of the VM: zone, size, OS image, and root disk. The stepper at the top always shows where you are; the usage panel on the right updates live as you make choices.
 
 <MacFrame
   src="/img/screenshots/compute/create-vm/02-step1-empty.png"
   alt="Step 1 of the Create Instance wizard — empty Base Config form"
   title="Create Instance — Step 1 · Base Config (empty)"
-  caption="Fresh Step 1: stepper at top, quota panel on the right, form waiting to be filled."
+  caption="Fresh Step 1: stepper at top, live usage panel on the right, form waiting to be filled."
 />
 
 Fill it in top to bottom.
@@ -63,7 +63,7 @@ Leave the default (e.g. `in-north-az1`). Pick a specific AZ only if you need to 
 
 ### b) Specification (flavor)
 
-Each row is a pre-defined size — vCPU, memory, included internal-network bandwidth. Click the radio on the row to select it. The **Selected** chip below the table reflects your pick.
+Each row is a pre-defined size — vCPU, memory, included internal-network bandwidth. Click the radio on the row to select it. The **Selected** chip below the table reflects your pick, and the usage panel on the right updates so you can see how the shape fits your project's current allocation.
 
 For a first VM, **`m1.small` (1 vCPU / 2 GB RAM)** is a good starting point.
 
