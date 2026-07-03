@@ -28,7 +28,7 @@ Four public flavors ship on the platform today:
 
 ## How you pick one
 
-Flavors don't have a dedicated Skyline page for tenants — you choose them inside the **Create Instance** wizard, at Step 1 · Base Config. Every visible row is a flavor, and the **Selected** chip below the table confirms your pick. See [Create a VM → Step 1 · Base Config](/compute/create-vm#2-step-1--base-config).
+Flavors don't have a dedicated management page for tenants — you choose them inside the **Create Instance** wizard, at Step 1 · Base Config. Every visible row is a flavor, and the **Selected** chip below the table confirms your pick. See [Create a VM → Step 1 · Base Config](/compute/create-vm#2-step-1--base-config).
 
 The wizard's usage panel on the right updates live as you pick — so you can see how the flavor fits your project's current compute allocation.
 

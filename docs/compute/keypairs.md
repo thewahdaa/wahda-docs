@@ -21,7 +21,7 @@ From the left navigation: **Compute → Key Pairs**. The page lists every key pa
 <MacFrame
   src="/img/screenshots/compute/keypairs/01-list-empty.png"
   alt="Key Pairs page — empty list on a fresh project"
-  title="Skyline — Compute › Key Pairs"
+  title="Compute › Key Pairs"
   caption="Fresh project. Click Create Keypair to add one."
 />
 
@@ -40,7 +40,7 @@ Click **Create Keypair**. A dialog opens with two tabs: **Create Keypair** (gene
 <MacFrame
   src="/img/screenshots/compute/keypairs/02-create-keypair.png"
   alt="Create Keypair dialog — Create Keypair tab active"
-  title="Skyline — Compute › Key Pairs › Create Keypair"
+  title="Compute › Key Pairs › Create Keypair"
   caption="Two tabs: Create Keypair generates a new one; Import Keypair takes a public key you already have."
 />
 
@@ -52,10 +52,10 @@ Fill in:
 |---|---|
 | **Name** | Something you'll recognize. `laptop-2026` or `ops-shared` works better than `key1`. 1–128 chars, digits/letters/`-`/`_`. |
 
-Click **OK**. Skyline generates a 2048-bit RSA key pair, keeps the **public key** in the project, and streams the **private key** to your browser as a `.pem` download.
+Click **OK**. The platform generates a 2048-bit RSA key pair, keeps the **public key** in the project, and streams the **private key** to your browser as a `.pem` download.
 
 :::caution The private key is shown once — download it now
-That download is the only time you get the private key. Skyline does **not** store it. If you close the dialog without saving the file, you'll have to delete the key and create a new one. Put the file somewhere you back up: a password manager, or `~/.ssh/` on a machine that's already encrypted.
+That download is the only time you get the private key. The platform does **not** store it. If you close the dialog without saving the file, you'll have to delete the key and create a new one. Put the file somewhere you back up: a password manager, or `~/.ssh/` on a machine that's already encrypted.
 :::
 
 Set permissions so `ssh` will accept it:
@@ -102,7 +102,7 @@ ssh-keygen -t ed25519 -C "you@laptop"
 
 ## Using a key pair
 
-Once the key pair exists in the project, it appears in the **Key Pair** dropdown on Step 3 of the Create VM wizard. Pick it there and Skyline installs it as an authorized key for the image's default user at first boot.
+Once the key pair exists in the project, it appears in the **Key Pair** dropdown on Step 3 of the Create VM wizard. Pick it there and the platform installs it as an authorized key for the image's default user at first boot.
 
 You SSH in with the **private key** you saved (for generated pairs) or the private key on your laptop (for imported pairs):
 
@@ -124,7 +124,7 @@ To rotate cleanly:
 1. Import (or generate) a new key pair.
 2. Add it to `~/.ssh/authorized_keys` on every VM that used the old one.
 3. Remove the old key from `authorized_keys`.
-4. Delete the old key pair in Skyline.
+4. Delete the old key pair from the console.
 
 ---
 

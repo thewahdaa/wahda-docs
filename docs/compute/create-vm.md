@@ -36,7 +36,7 @@ From the left navigation: **Compute → Instances**. The list shows every VM in 
 <MacFrame
   src="/img/screenshots/compute/create-vm/01-instances-list.png"
   alt="Compute › Instances list with the Create Instance button in the top-left"
-  title="Skyline — Compute › Instances"
+  title="Compute › Instances"
   caption="Click Create Instance to launch the wizard."
 />
 

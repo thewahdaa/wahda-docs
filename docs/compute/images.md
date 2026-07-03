@@ -28,7 +28,7 @@ From the left navigation: **Compute → Images**. The page has four tabs across 
 <MacFrame
   src="/img/screenshots/compute/images/01-list-empty.png"
   alt="Current Project Images tab — empty state on a fresh project"
-  title="Skyline — Compute › Images"
+  title="Compute › Images"
   caption="Fresh project. Empty on Current Project Images; browse Public for the catalog."
 />
 
@@ -41,7 +41,7 @@ Open **Public Images** to see everything ready to boot. There are 23 images avai
 <MacFrame
   src="/img/screenshots/compute/images/02-public-images.png"
   alt="Public Images tab — catalog of ready-to-boot OS images"
-  title="Skyline — Compute › Images › Public Images"
+  title="Compute › Images › Public Images"
   caption="Public catalog: Kali, AlmaLinux 8/9, Ubuntu 24.04, Rocky Linux 8, CentOS Stream 9, and more."
 />
 
@@ -89,7 +89,7 @@ Click **Create Image** in the top-left.
 <MacFrame
   src="/img/screenshots/compute/images/03-create-image.png"
   alt="Create Image form — Upload File tab with all fields visible"
-  title="Skyline — Compute › Images › Create Image"
+  title="Compute › Images › Create Image"
   caption="Upload flow: name, file (or URL), disk & container format, OS metadata, minimum requirements."
 />
 
@@ -100,7 +100,7 @@ Fill it top to bottom.
 | Field | Notes |
 |---|---|
 | **Name** | 1–128 chars, letters/digits/`-`/`_`/`.`/`()[]`. Pick something you'll recognize later — `debian-12-nginx-2026-07` beats `image1`. |
-| **Upload Type** | **Upload File** *(browser upload)* or **File URL** *(pull from an HTTP/HTTPS URL Glance can reach)*. |
+| **Upload Type** | **Upload File** *(browser upload)* or **File URL** *(pull from an HTTP/HTTPS URL the platform can reach)*. |
 | **File** | The image blob. Click **Click to Upload** and pick your `.qcow2` / `.raw` / `.vmdk` file. |
 | **Disk Format** | `QCOW2` (recommended), `RAW`, `VMDK`, `VHD`, `ISO`. Must match the file you're uploading — a mismatch causes launch failures with no useful error. |
 | **Container Format** | Leave `Bare` unless you know you're uploading an OVA/OVF/AKI/AMI. |
@@ -112,7 +112,7 @@ Fill it top to bottom.
 | **Protected** | If checked, the image cannot be deleted until unchecked. Turn on for anything a production VM boots from. |
 | **Usage Type** | `Common Server` for normal images. Other options exist but are for specialized workloads. |
 
-Click **Confirm**. Upload progress shows in the header notification; the row appears under **Current Project Images** and moves from `queued` → `saving` → `active` as Glance ingests it.
+Click **Confirm**. Upload progress shows in the header notification; the row appears under **Current Project Images** and moves from `queued` → `saving` → `active` as the platform ingests it.
 
 :::caution First-boot readiness
 Your image needs **cloud-init installed and enabled**. Without it, the keypair, hostname, and user-data script the Create VM wizard sends over don't get applied — and you can't SSH in. If you're building from a stock ISO, install `cloud-init` and enable `cloud-init.service` before you snapshot.

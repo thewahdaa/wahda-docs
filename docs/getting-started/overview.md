@@ -60,7 +60,7 @@ See [Projects →](/getting-started/projects-and-quotas) for how to create, swit
 | **Block Storage** | Persistent SSD-backed volumes you attach to instances. Snapshots. |
 | **Object Storage** | S3-compatible bucket storage for unstructured data and static assets. |
 | **Networking** | Private networks, subnets, routers, security groups, floating (public) IPs. |
-| **Load Balancer** | Managed L4/L7 load balancing (Octavia) for HA services. |
+| **Load Balancer** | Managed L4/L7 load balancing for HA services. |
 | **Databases (DBaaS)** | Managed MySQL/MariaDB with backups, replicas, and config groups. |
 | **Identity** | Users, projects, roles, application credentials, keypairs. |
 

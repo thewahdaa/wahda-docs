@@ -29,7 +29,7 @@ If you already know you need more than a handful of VMs, or a specific database 
 
 ## 2. Open the console
 
-Go to [**console.thewahda.com**](https://console.thewahda.com). This is **Skyline** — the web UI for The Wahda Cloud.
+Go to [**console.thewahda.com**](https://console.thewahda.com) — the web console for The Wahda Cloud.
 
 <MacFrame
   src="/img/screenshots/getting-started/01-login-page.png"

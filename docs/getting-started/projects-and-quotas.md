@@ -59,7 +59,7 @@ You pay only for what you actually use — running instances, allocated block st
 
 ## Hit a soft limit?
 
-If you try to create something and Skyline says you've reached a limit — more vCPU, more block storage, more floating IPs than the project currently has room for — that's a **soft limit** we set to keep runaway automation from surprising you on the next invoice. It's not a product cap.
+If you try to create something and the console says you've reached a limit — more vCPU, more block storage, more floating IPs than the project currently has room for — that's a **soft limit** we set to keep runaway automation from surprising you on the next invoice. It's not a product cap.
 
 Email **`info@thewahda.com`** with the project name and what you need — new compute headroom, more block storage, extra floating IPs, a bigger DBaaS quota — and we'll raise it. Same business day is normal.
 

@@ -5,7 +5,7 @@ description: Site-to-site IPsec tunnel from your Wahda Cloud project to a remote
 
 # VPN
 
-The Wahda Cloud supports **site-to-site IPsec VPN** through Neutron's VPNaaS. You configure an encrypted tunnel between your project's router and a remote peer (your office edge, another cloud, another region) — after that, VMs in your project talk to hosts on the remote network as if they were on the same private plane.
+The Wahda Cloud offers **site-to-site IPsec VPN** as a managed service. You configure an encrypted tunnel between your project's router and a remote peer (your office edge, another cloud, another region) — after that, VMs in your project talk to hosts on the remote network as if they were on the same private plane.
 
 Use it when you want a **permanent, encrypted L3 bridge** between your on-prem network and this project without exposing either side to the internet.
 
@@ -23,7 +23,7 @@ Use it when you want a **permanent, encrypted L3 bridge** between your on-prem n
 
 ## What you need on the other side
 
-The remote peer is anything that speaks standard IPsec — Cisco ASA, Fortinet, MikroTik, pfSense, another OpenStack cloud, a Linux box running strongSwan/Libreswan. You'll need:
+The remote peer is anything that speaks standard IPsec — Cisco ASA, Fortinet, MikroTik, pfSense, another cloud provider, a Linux box running strongSwan or Libreswan. You'll need:
 
 - The remote peer's **public IP** (the tunnel endpoint).
 - The remote **CIDR(s)** you want to reach.
@@ -31,7 +31,7 @@ The remote peer is anything that speaks standard IPsec — Cisco ASA, Fortinet, 
 - Matching **IKE and IPsec policies** — encryption, integrity, PFS group, lifetime. Mismatches cause the tunnel to negotiate then instantly drop; the mismatched attribute shows up in the peer's log.
 
 :::note This page is in progress
-The step-by-step console walkthrough — creating IKE/IPsec policies, the VPN service, an endpoint group, and finally the site connection — is being written. In the meantime, the [OpenStack Neutron VPNaaS reference](https://docs.openstack.org/neutron-vpnaas/latest/) documents the exact same API this console flow drives.
+The step-by-step console walkthrough — creating IKE and IPsec policies, the VPN service, an endpoint group, and finally the site connection — is being written. Check back soon, or contact **`info@thewahda.com`** if you need to stand up a tunnel today.
 :::
 
 ---

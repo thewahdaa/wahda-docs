@@ -125,7 +125,7 @@ Give the bastion only one job: forwarding SSH sessions. Disable everything else.
 
 If SSH times out **immediately after** the VM shows `Active`, the OS is often still finishing cloud-init. Give it 30–60 seconds. During that window `ping` may work but `ssh` won't respond — cloud-init hasn't installed the SSH keys yet.
 
-You can watch cloud-init from the console (**Instances → click the VM → Console** tab in Skyline) — look for `Cloud-init` lines finishing with `finished at` before you retry.
+You can watch cloud-init from the console (**Instances → click the VM → Console** tab) — look for `Cloud-init` lines finishing with `finished at` before you retry.
 
 ---
 
@@ -157,7 +157,7 @@ scp -o "ProxyJump ubuntu@bastion" local.tar.gz ubuntu@10.0.0.15:~/
 | `Permission denied (publickey)` | Wrong username (`ubuntu` vs `rocky` vs `centos`), or the wrong key is being offered. Retry with `-vvv` and check which key SSH tries. |
 | `Too many authentication failures` | Your agent is offering too many keys; SSH gives up. Add `IdentitiesOnly yes` and name the right key with `IdentityFile`. |
 | `Host key verification failed` | The VM was recreated and got a new host key. Remove the old fingerprint: `ssh-keygen -R <ip-or-hostname>`. |
-| `port 22: Connection refused` | The SSH server isn't running on the VM. The image is bad, or SSH crashed. Reboot the instance from Skyline. |
+| `port 22: Connection refused` | The SSH server isn't running on the VM. The image is bad, or SSH crashed. Reboot the instance from the console. |
 
 ---
 
