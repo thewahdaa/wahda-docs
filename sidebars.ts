@@ -32,6 +32,8 @@ const sidebars: SidebarsConfig = {
         'networking/overview',
         'networking/security-groups',
         'networking/floating-ips',
+        'networking/load-balancer',
+        'networking/vpn',
       ],
     },
     {
