@@ -139,26 +139,45 @@
   -webkit-backdrop-filter: blur(6px);
 }
 
-.lightboxImage {
+/* Figure inside the lightbox — full Mac-window chrome + image + caption */
+.lightboxFigure {
+  display: flex;
+  flex-direction: column;
   max-width: 100%;
   max-height: 92vh;
-  height: auto;
-  width: auto;
-  display: block;
-  border-radius: 8px;
-  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6),
-              0 15px 30px -10px rgba(0, 0, 0, 0.4);
+  margin: 0;
+  background: var(--wd-card);
+  border: 1px solid var(--wd-border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 30px 60px -20px rgba(0, 0, 0, 0.6),
+    0 15px 30px -10px rgba(0, 0, 0, 0.4);
   opacity: 0;
   transform: scale(0.96);
   transition: opacity 0.22s ease, transform 0.22s ease;
   cursor: default;
-  /* Keep the full-res screenshot crisp */
-  image-rendering: -webkit-optimize-contrast;
 }
 
-.lightboxOpen .lightboxImage {
+.lightboxOpen .lightboxFigure {
   opacity: 1;
   transform: scale(1);
+}
+
+.lightboxImage {
+  display: block;
+  min-height: 0;   /* let flexbox shrink it */
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  image-rendering: -webkit-optimize-contrast;
 }
 
 .lightboxClose {

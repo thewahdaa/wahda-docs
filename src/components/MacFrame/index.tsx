@@ -112,7 +112,21 @@ export default function MacFrame({
           aria-modal="true"
           aria-label={alt}
         >
-          <img className={styles.lightboxImage} src={resolvedSrc} alt={alt} />
+          <figure className={styles.lightboxFigure}>
+            <div className={styles.bar} aria-hidden="true">
+              <div className={styles.dots}>
+                <span />
+                <span />
+                <span />
+              </div>
+              <div className={styles.title}>{title}</div>
+              <div className={styles.spacer} />
+            </div>
+            <img className={styles.lightboxImage} src={resolvedSrc} alt={alt} />
+            {caption ? (
+              <figcaption className={styles.caption}>{caption}</figcaption>
+            ) : null}
+          </figure>
           <button
             type="button"
             className={styles.lightboxClose}
