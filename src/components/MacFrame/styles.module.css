@@ -1,6 +1,7 @@
 /*
  * MacFrame — macOS window chrome around a screenshot.
  * Traffic lights + centered title + drop shadow. Light/dark aware.
+ * Click image → full-screen lightbox with smooth fade+zoom.
  */
 
 .frame {
@@ -69,6 +70,25 @@
   flex-shrink: 0;
 }
 
+/* The image is wrapped in a button so it's a native keyboard target. */
+.imageButton {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+  transition: transform 0.15s ease;
+}
+.imageButton:hover .image {
+  filter: brightness(1.02);
+}
+.imageButton:focus-visible {
+  outline: 2px solid var(--wd-primary);
+  outline-offset: 2px;
+}
+
 .image {
   display: block;
   width: 100%;
@@ -79,6 +99,9 @@
   border-radius: 0 !important;
   box-shadow: none !important;
   background: transparent !important;
+  transition: filter 0.15s ease;
+  /* Keep screenshots crisp when the browser scales them */
+  image-rendering: -webkit-optimize-contrast;
 }
 
 .caption {
@@ -89,4 +112,90 @@
   background: var(--wd-muted-bg);
   text-align: center;
   font-style: italic;
+}
+
+/* ============================================================= */
+/* Lightbox                                                        */
+/* ============================================================= */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4vh 4vw;
+  background: rgba(6, 10, 20, 0);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  transition: background 0.22s ease, backdrop-filter 0.22s ease;
+  cursor: zoom-out;
+}
+
+.lightboxOpen {
+  background: rgba(6, 10, 20, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.lightboxImage {
+  max-width: 100%;
+  max-height: 92vh;
+  height: auto;
+  width: auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6),
+              0 15px 30px -10px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  cursor: default;
+  /* Keep the full-res screenshot crisp */
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.lightboxOpen .lightboxImage {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.lightboxClose {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(20px, env(safe-area-inset-right));
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.15s ease, transform 0.15s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.lightboxClose:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: scale(1.05);
+}
+.lightboxClose:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 2px;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .lightbox,
+  .lightboxImage,
+  .lightboxClose,
+  .imageButton,
+  .image {
+    transition: none !important;
+  }
 }
