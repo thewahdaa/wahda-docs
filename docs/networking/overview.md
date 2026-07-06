@@ -1,6 +1,19 @@
 ---
 title: Networking overview
-description: What the network stack on The Wahda Cloud looks like — tenant networks, security groups, floating IPs, load balancers, VPN.
+description: Cloud networking on The Wahda Cloud — private networks, security groups, floating public IPs, managed load balancer, and site-to-site IPsec VPN.
+keywords:
+  - cloud networking
+  - private cloud network
+  - security groups
+  - floating IP
+  - public IPv4
+  - managed load balancer
+  - IPsec VPN
+  - site-to-site VPN
+  - cloud router
+  - SDN
+  - The Wahda Cloud
+  - pay-as-you-go cloud
 ---
 
 # Networking overview

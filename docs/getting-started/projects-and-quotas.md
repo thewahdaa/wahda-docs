@@ -1,6 +1,19 @@
 ---
 title: Projects
-description: How projects group your resources, and what to do when you outgrow a soft limit.
+description: Organize cloud resources into projects, isolate dev from prod, track spend per project, and request quota increases for VMs, storage, and floating IPs.
+keywords:
+  - cloud project
+  - resource isolation
+  - cloud quota
+  - quota increase
+  - cloud billing per project
+  - GST invoice
+  - INR pricing
+  - cloud RBAC
+  - cloud multi-tenancy
+  - cost allocation
+  - The Wahda Cloud
+  - pay-as-you-go cloud
 ---
 
 # Projects

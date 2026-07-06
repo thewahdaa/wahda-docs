@@ -1,6 +1,19 @@
 ---
 title: Flavors
-description: The available VM shapes on The Wahda Cloud — vCPU, RAM, and root disk sizing.
+description: Cloud VM flavors on The Wahda Cloud — vCPU, RAM, and root disk sizing for m1.tiny through m1.large. Pay-as-you-go INR pricing with GST invoicing.
+keywords:
+  - cloud VM flavor
+  - VM sizing
+  - vCPU RAM disk
+  - cloud instance types
+  - cloud VM pricing
+  - per-second billing
+  - GST cloud billing
+  - INR pricing
+  - pay-as-you-go cloud
+  - m1.small
+  - m1.medium
+  - The Wahda Cloud
 ---
 
 # Flavors

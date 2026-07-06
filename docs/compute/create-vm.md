@@ -1,6 +1,20 @@
 ---
 title: Create a virtual machine
-description: Launch your first Linux VM on The Wahda Cloud in about five minutes — pick a size, an OS, a network, and you're online.
+description: Launch a Linux cloud VM in about five minutes — pick a flavor, image, network, and SSH key pair, then boot. Per-second billing in INR with GST invoicing.
+keywords:
+  - create cloud VM
+  - launch virtual machine
+  - Linux VM
+  - cloud instance
+  - Ubuntu VM
+  - AlmaLinux VM
+  - Rocky Linux VM
+  - SSH key pair
+  - cloud VM pricing
+  - GST cloud billing
+  - INR pricing
+  - pay-as-you-go cloud VM
+  - The Wahda Cloud
 ---
 
 # Create a virtual machine

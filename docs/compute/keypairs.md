@@ -1,6 +1,17 @@
 ---
 title: Key pairs
-description: Create and manage SSH key pairs to log into your virtual machines.
+description: Create and manage SSH key pairs to log into cloud VMs — generate a new key pair in the console or import an existing SSH public key from your laptop.
+keywords:
+  - SSH key pair
+  - cloud SSH access
+  - SSH public key
+  - ed25519 key
+  - cloud VM SSH login
+  - import SSH key
+  - generate SSH key
+  - cloud key management
+  - passwordless SSH
+  - The Wahda Cloud
 ---
 
 # Key pairs

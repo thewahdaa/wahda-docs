@@ -1,6 +1,19 @@
 ---
 title: Platform overview
-description: What The Wahda Cloud is, how the platform is organized, and how you pay for what you use.
+description: The Wahda Cloud platform overview — cloud VMs, block and object storage, managed load balancer, IPsec VPN, and DBaaS with GST-compliant INR billing.
+keywords:
+  - cloud provider
+  - pay-as-you-go cloud
+  - public cloud
+  - cloud VM
+  - managed load balancer
+  - S3-compatible object storage
+  - managed database
+  - GST cloud billing
+  - INR pricing
+  - rupee cloud billing
+  - IaaS platform
+  - The Wahda Cloud
 ---
 
 # Platform overview

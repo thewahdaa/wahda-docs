@@ -1,6 +1,18 @@
 ---
 title: Images
-description: Public images available on The Wahda Cloud, and how to upload your own custom OS image.
+description: Boot cloud VMs from the public image catalog — Ubuntu, AlmaLinux, Rocky, CentOS Stream, Debian, Kali — or upload your own custom hardened golden image.
+keywords:
+  - cloud VM image
+  - Ubuntu cloud image
+  - AlmaLinux image
+  - Rocky Linux image
+  - custom cloud image
+  - golden image
+  - qcow2 upload
+  - cloud-init
+  - hardened OS image
+  - cloud VM template
+  - The Wahda Cloud
 ---
 
 # Images

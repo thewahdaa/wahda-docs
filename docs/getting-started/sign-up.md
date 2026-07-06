@@ -1,6 +1,18 @@
 ---
 title: Sign up & first login
-description: Request access to The Wahda Cloud, receive your credentials, and log into the console.
+description: Sign up for The Wahda Cloud — request a cloud account, receive credentials, and log into the console to launch your first cloud VM.
+keywords:
+  - cloud sign up
+  - create cloud account
+  - cloud provider account
+  - cloud console login
+  - pay-as-you-go cloud
+  - GST cloud billing
+  - INR pricing
+  - cloud onboarding
+  - cloud free trial
+  - cloud credentials
+  - The Wahda Cloud
 ---
 
 # Sign up & first login

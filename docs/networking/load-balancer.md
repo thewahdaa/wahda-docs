@@ -1,18 +1,20 @@
 ---
 title: Load balancer
-description: Managed L4/L7 load balancer with health checks, TLS termination, and session persistence. Distribute traffic across multiple backend VMs and get zero-downtime deployments on The Wahda Cloud.
+description: Managed L4/L7 load balancer with health checks, SSL/TLS termination, session persistence. High availability and zero-downtime deployments on The Wahda Cloud.
 keywords:
-  - load balancer
   - managed load balancer
-  - HTTPS load balancer
-  - TLS termination
+  - L4 L7 load balancing
+  - HTTPS termination
+  - SSL TLS termination
   - health checks
   - session persistence
   - traffic distribution
   - high availability
-  - zero downtime deployment
+  - zero-downtime deployment
   - blue-green deployment
   - horizontal scaling
+  - GST cloud billing
+  - INR pricing
   - The Wahda Cloud
 ---
 

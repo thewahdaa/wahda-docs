@@ -1,6 +1,18 @@
 ---
 title: Connect to your VM
-description: SSH into your VM after it's up — via floating IP, from a bastion, or through an SSH config alias.
+description: SSH into your cloud VM via floating IP, through a bastion, or with an SSH config alias. Default users for Ubuntu, AlmaLinux, Rocky, CentOS, Debian.
+keywords:
+  - SSH into cloud VM
+  - connect to cloud VM
+  - SSH floating IP
+  - SSH bastion host
+  - SSH config alias
+  - cloud VM login
+  - Ubuntu ubuntu user
+  - Rocky rocky user
+  - cloud VM access
+  - SSH troubleshooting
+  - The Wahda Cloud
 ---
 
 # Connect to your VM

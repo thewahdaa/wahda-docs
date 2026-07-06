@@ -1,6 +1,18 @@
 ---
 title: VPN
-description: Site-to-site IPsec tunnel from your Wahda Cloud project to a remote network.
+description: Managed site-to-site IPsec VPN — encrypted L3 tunnel between your cloud project and an office edge, another cloud, or another region. IKEv1, IKEv2, PFS.
+keywords:
+  - IPsec VPN
+  - site-to-site VPN
+  - cloud VPN
+  - managed VPN service
+  - IKEv2 VPN
+  - IKEv1 VPN
+  - encrypted tunnel
+  - hybrid cloud VPN
+  - cloud-to-onprem VPN
+  - PSK pre-shared key
+  - The Wahda Cloud
 ---
 
 # VPN

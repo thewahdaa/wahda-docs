@@ -1,6 +1,18 @@
 ---
 title: Floating IPs
-description: Give a VM a stable public IPv4 address — allocate one from the pool and associate it to your instance.
+description: Assign a stable public IPv4 to a cloud VM with a floating IP. Move IPs between VMs in seconds for zero-downtime deployments and blue-green cutovers.
+keywords:
+  - floating IP
+  - public IPv4
+  - cloud VM public IP
+  - static IP address
+  - cloud IPv4 pool
+  - zero-downtime deployment
+  - blue-green deployment
+  - elastic IP
+  - cloud DNAT
+  - SNAT outbound
+  - The Wahda Cloud
 ---
 
 # Floating IPs

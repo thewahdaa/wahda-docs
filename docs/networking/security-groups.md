@@ -1,6 +1,18 @@
 ---
 title: Security groups
-description: Stateful firewalls attached to your VMs — the mechanism that decides which ports are reachable, and from where.
+description: Stateful cloud firewall rules on The Wahda Cloud — decide which ports on your cloud VM are reachable, from where, and over which protocol. Deny by default.
+keywords:
+  - cloud security group
+  - cloud firewall
+  - stateful firewall
+  - cloud network security
+  - inbound rules
+  - port 22 SSH
+  - port 443 HTTPS
+  - deny by default
+  - cloud VM firewall
+  - cloud ingress rules
+  - The Wahda Cloud
 ---
 
 # Security groups
