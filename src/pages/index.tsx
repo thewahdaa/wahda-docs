@@ -42,7 +42,7 @@ export default function Home(): React.ReactElement {
   return (
     <Layout
       title="Documentation"
-      description="Build, ship and scale on India's pay-as-you-go cloud. Step-by-step guides for compute, networking, storage and managed databases."
+      description="Build, ship and scale on a pay-as-you-go cloud with GST-compliant billing in INR. Step-by-step guides for compute, networking, storage and managed databases."
     >
       <main>
         <section className="wd-hero">
@@ -52,7 +52,7 @@ export default function Home(): React.ReactElement {
             </h1>
             <p className="subtitle">
               Step-by-step guides, references, and operational playbooks for builders on
-              India's pay-as-you-go cloud. Get from sign-up to production faster.
+              our pay-as-you-go cloud. Get from sign-up to production faster.
             </p>
             <div className="cta-row">
               <Link className="button button--primary button--lg" to="/getting-started/overview">

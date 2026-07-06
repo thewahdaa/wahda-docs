@@ -18,7 +18,7 @@ keywords:
 
 # Platform overview
 
-The Wahda Cloud is a **pay-as-you-go public cloud** in India. You get on-demand virtual machines, managed databases, virtual networking, block and object storage, and identity — all managed from a single web console.
+The Wahda Cloud is a **pay-as-you-go public cloud**. You get on-demand virtual machines, managed databases, virtual networking, block and object storage, and identity — all managed from a single web console, billed in INR with GST-compliant invoices.
 
 This page is the shortest useful description of how the platform is organized. If you're new here, read it once and keep the map in your head as you move through the other guides.
 
@@ -30,7 +30,7 @@ Every resource you create lives in exactly one **region**. A region is a physica
 
 | Region | Location | Availability zones |
 |---|---|---|
-| `in-north-1` | North India (Hyderabad) | `in-north-az1` |
+| `in-north-1` | Hyderabad (North region) | `in-north-az1` |
 
 Inside a region, an **availability zone (AZ)** is a failure-isolated compartment — separate power, cooling, and network paths. For workloads that must survive a single-AZ outage, spread your instances across multiple AZs.
 
