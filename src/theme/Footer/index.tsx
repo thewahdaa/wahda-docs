@@ -22,7 +22,7 @@ export default function Footer(): React.ReactElement {
               <img src="/img/brand/logo.svg" alt="The Wahda Cloud" className="wd-footer-logo" />
             </Link>
             <p className="wd-footer-tagline">
-              Pay-as-you-go cloud infrastructure built for India. IaaS, Managed Kubernetes, DBaaS.
+              Pay-as-you-go cloud infrastructure with GST-compliant billing in INR. IaaS, Managed Kubernetes, DBaaS.
             </p>
           </div>
 
