@@ -35,7 +35,7 @@ Spin up a Linux virtual machine from the console in about five minutes. This pag
 | **Project** | The tenant boundary. Instances, networks, volumes, and IPs all live inside one project. |
 | **Availability zone** | A failure-isolated location inside a region. Pick the default unless you're explicitly running multi-AZ. |
 | **Specification** | A pre-defined VM size — vCPU + memory + included internal-network bandwidth. |
-| **Image** | A bootable OS template — Ubuntu, Debian, Rocky Linux, Windows, etc. |
+| **Image** | A bootable OS template. Ubuntu, AlmaLinux, Rocky Linux, CentOS Stream, and Kali are in the public catalog; you can also [upload your own](/compute/images#upload-your-own-image). |
 | **System Disk** | The root disk created at launch, attached as a persistent volume. |
 | **Network** | A private network inside your project, optionally connected to the internet via a router. |
 | **Security Group** | A firewall ruleset attached to the VM. Defaults block all inbound traffic. |
@@ -92,7 +92,7 @@ For a first VM, **`m1.small` (1 vCPU / 2 GB RAM)** is a good starting point.
 
 Leave **Start Source** on the default **Image** tab. The other tabs let you boot from an existing snapshot or volume.
 
-Under **Operating System**, click the OS family icon — **Ubuntu**, Debian, Fedora, Rocky, Windows, etc. — then click the row of the image you want in the table below. We recommend the latest LTS for Linux.
+Under **Operating System**, click the OS family icon (Ubuntu, AlmaLinux, Rocky, CentOS Stream, etc.), then click the row of the image you want in the table below. We recommend the latest LTS for Linux.
 
 :::tip Click anywhere on the row
 Name, Project, System Version — any cell selects the image. The blue radio dot on the left appears once selected.
@@ -203,10 +203,12 @@ The default user depends on the image:
 | Image family | Default user |
 |---|---|
 | Ubuntu | `ubuntu` |
-| Debian | `debian` |
-| Rocky Linux / AlmaLinux | `rocky` / `almalinux` |
-| Fedora | `fedora` |
-| Windows | use RDP — see [Connect over SSH/RDP →](/compute/connect-ssh) |
+| AlmaLinux | `almalinux` |
+| Rocky Linux | `rocky` |
+| CentOS Stream | `cloud-user` |
+| Kali | `kali` |
+
+For images you uploaded yourself, the default user is whatever the image bakes in — check the image's details page for the **OS Admin** field. Windows uploads use RDP on port `3389` with the password set in Step 3.
 
 If you can't reach the VM from your laptop, the most common cause is the **security group blocking port 22**. See [Security groups →](/networking/security-groups) for the recommended SSH-only ruleset.
 

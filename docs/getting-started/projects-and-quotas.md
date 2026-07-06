@@ -64,7 +64,7 @@ Self-serve project creation is on the roadmap.
 
 ## Checking your usage
 
-The **Home** dashboard shows current usage for compute, storage, and networking in the region. The **Instances**, **Volumes**, **Networks**, and **Floating IPs** pages each have a live panel on the right with the current numbers.
+The **Home** dashboard has a **Quota Overview** section that shows current usage vs. allocation for each resource type. Above it, four quick-tile shortcuts (**Instances**, **Volumes**, **Networks**, **Routers**) jump straight to each resource's list page.
 
 You pay only for what you actually use — running instances, allocated block storage, attached floating IPs, active load balancers, active database instances. Networks, subnets, routers, security groups, key pairs, server groups don't cost anything; use as many as you need.
 

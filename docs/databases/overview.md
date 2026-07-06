@@ -145,4 +145,4 @@ Now you know what the service is. Pick the next step based on where you are:
 
 Managed database instances are billed **per hour of running state**, on the same pay-as-you-go model as VMs, invoiced in INR with GST. The bill includes the flavor's vCPU + RAM + storage; backups consume object storage separately at the standard object-storage rate. Read replicas are billed as separate instances at their own flavor.
 
-Your current DBaaS allocation for the project is visible in the console's Quota panel. If you're bumping against it, email **`info@thewahda.com`** and we'll raise it.
+If you hit an allocation limit when creating a new instance, email **`info@thewahda.com`** and we'll raise it.

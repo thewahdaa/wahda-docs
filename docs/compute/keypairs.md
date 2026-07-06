@@ -63,7 +63,7 @@ Fill in:
 |---|---|
 | **Name** | Something you'll recognize. `laptop-2026` or `ops-shared` works better than `key1`. 1–128 chars, digits/letters/`-`/`_`. |
 
-Click **OK**. The platform generates a 2048-bit RSA key pair, keeps the **public key** in the project, and streams the **private key** to your browser as a `.pem` download.
+Click **OK**. The platform generates an SSH key pair, keeps the **public key** in the project, and streams the **private key** to your browser as a `.pem` download.
 
 :::caution The private key is shown once — download it now
 That download is the only time you get the private key. The platform does **not** store it. If you close the dialog without saving the file, you'll have to delete the key and create a new one. Put the file somewhere you back up: a password manager, or `~/.ssh/` on a machine that's already encrypted.

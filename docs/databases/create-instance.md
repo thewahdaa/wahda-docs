@@ -49,28 +49,28 @@ From the left navigation of `console.thewahda.com`, go to **Databases → Instan
   caption="The Instances list. Click Create Instance to start the wizard."
 />
 
-Click **Create Instance** in the top-right.
+Click **Create Database Instance** in the top-left.
 
 ---
 
-## Step 1 — Base config
+## Step 1 — Details
 
 <MacFrame
   src="/img/screenshots/databases/create-instance-step1.png"
-  alt="Create Instance — Step 1 · Base Config"
-  title="Create Instance — Step 1 · Base Config"
-  caption="Pick the engine, version, flavor, name and storage size."
+  alt="Create Database Instance — Step 1 · Details"
+  title="Create Database Instance — Step 1 · Details"
+  caption="Four steps across the top: Details → Networking → Initialize Databases → Advanced. Pick zone, name, standalone-vs-replica, disk, engine, flavor."
 />
 
 | Field | What to enter |
 |---|---|
-| **Name** | Recognizable label — `app-prod-mysql`, `analytics-pg-17`. Letters, digits, `-`, `_`, `.`. Keep it stable; it appears in dashboards, alerts, and log lines. |
-| **Description** | Optional one-liner — what this database is for, who owns it. |
-| **Datastore** | `mysql`, `mariadb`, or `postgresql`. Locked after creation. |
-| **Datastore version** | The supported versions for the datastore you picked. `8.0` or `8.4` for MySQL; `11.4` for MariaDB; `16`, `17`, or `18` for PostgreSQL. Also locked. |
-| **Flavor** | `m1.small` / `m1.medium` / `m1.large`. You can resize later; you can't shrink below what the data uses. |
-| **Volume Size (GB)** | The dedicated persistent storage for the database files. Start with the flavor default (20 / 40 / 80 GB); the wizard lets you go higher. You can grow storage later; you can't shrink it. |
-| **Volume Type** | Leave the default unless the platform team asked you to pick a specific tier. |
+| **Availability Zone** | Leave the default (`in-north-az1`). Pick a specific AZ only for a multi-AZ layout. |
+| **Database Instance Name** | Recognizable label — `app-prod-mysql`, `analytics-pg-17`. Letters, digits, `-`, `_`, `.`. Keep it stable; it appears in dashboards, alerts, and log lines. |
+| **Instance Type** | `Standalone` for a fresh primary. Switch to `Replica` when you're adding a read-only copy of an existing instance — see [Read replicas](/databases/replicas). |
+| **Database Disk (GiB)** | The dedicated persistent storage for the database files. Include headroom for a full backup restore plus write growth (see the tip below). You can grow the disk later; you can't shrink it. |
+| **Datastore Type** | `mysql`, `mariadb`, or `postgresql`. Locked after creation. |
+| **Datastore Version** | The supported versions for the datastore you picked. `8.0` or `8.4` for MySQL; `11.4` for MariaDB; `16`, `17`, or `18` for PostgreSQL. Also locked. |
+| **Database Flavor** | `m1.small` / `m1.medium` / `m1.large`. Filter with the tabs (`All Flavors`, `X86 Architecture`, `Heterogeneous Computing`, `Custom`). You can resize later; you can't shrink below what the data uses. |
 
 :::tip Sizing storage
 Include enough headroom for a full-size backup restore *plus* a few days of write growth. If your working set is 30 GB and grows at 1 GB/day, 40 GB will be tight in a month — pick 80. Growing later is cheap; running out at 2am isn't.
@@ -78,7 +78,7 @@ Include enough headroom for a full-size backup restore *plus* a few days of writ
 
 ---
 
-## Step 2 — Network
+## Step 2 — Networking
 
 Which private network the instance's endpoint will live on. This is a locked choice.
 
@@ -94,7 +94,7 @@ Managed database instances are **private by default** and cannot have a [floatin
 
 ---
 
-## Step 3 — Initial database and user
+## Step 3 — Initialize Databases
 
 The wizard lets you create the first database and its owning user in one shot.
 
@@ -109,7 +109,7 @@ Additional databases and users can be added later from the instance detail page'
 
 ---
 
-## Step 4 — Backups and configuration (optional)
+## Step 4 — Advanced (optional)
 
 You can leave both blank and change them after creation.
 
@@ -121,15 +121,13 @@ You can leave both blank and change them after creation.
 
 ---
 
-## Step 5 — Review and create
+## After you click Create
 
-The Review step summarizes every choice with an editable pencil next to each. Read every field, then click **Create**.
+Click **Create** in the bottom-right of Step 4. The instance moves through:
 
-The instance moves through:
-
-1. **`BUILD`** — the platform provisions the VM behind the endpoint and lays down the storage. 30–90 seconds.
+1. **`BUILD`** — the platform provisions the compute behind the endpoint and lays down the storage. 30–90 seconds.
 2. **`BACKUP` / `RESTORE_BACKUP`** — transient states you may see if the instance is being cloned or restored from a backup.
-3. **`ACTIVE`** — ready for connections. The **Endpoint** row on the detail page shows the private IP and port.
+3. **`ACTIVE`** — ready for connections. The endpoint address for your app appears on the instance's detail page.
 
 If it stalls on `BUILD` for more than 10 minutes, email **`info@thewahda.com`** with the instance ID.
 

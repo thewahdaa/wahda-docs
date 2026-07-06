@@ -54,10 +54,8 @@ Enter what you received:
 
 | Field | What to enter |
 |---|---|
-| **Domain** | The domain provided in your welcome email — typically `default`. |
-| **Username** | Your username. |
+| **Username** | The username from your welcome email. |
 | **Password** | Your initial password. |
-| **Region** | Leave the default (`in-north-1`). |
 
 <MacFrame
   src="/img/screenshots/getting-started/02-login-filled.png"
@@ -85,11 +83,12 @@ After sign-in you land on the project **Home** dashboard — a summary of the cu
   caption="Home dashboard. The bar across the top switches project and region."
 />
 
-Three things to notice on this screen:
+Four things to notice on this screen:
 
 1. **Project selector** (top bar) — the project you're currently working in. Every resource you create goes here.
 2. **Region selector** (top bar) — the region every action targets. Resources are region-scoped; switching region hides everything from the other region.
-3. **Usage tiles** — compute, storage, and networking used vs. currently allocated in this project. See [Projects →](/getting-started/projects-and-quotas).
+3. **Quota Overview** — compute, storage, and network usage vs. current allocation in this project, broken out by resource type. See [Projects →](/getting-started/projects-and-quotas).
+4. **Hello, `<your-username>`** panel on the right — shows your username, your assigned roles (`reader`, `member`, `manager`, `admin`), and your affiliated domain.
 
 ---
 

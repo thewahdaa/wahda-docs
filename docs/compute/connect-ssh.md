@@ -27,7 +27,7 @@ You need three things:
 
 - The VM's **IP address** — visible on **Compute → Instances**, in the `Fixed IP` column (private) or `Floating IP` column (public).
 - The **private key** — `.pem` from a generated key pair, or `~/.ssh/id_ed25519` for an imported one. See [Key pairs →](/compute/keypairs).
-- The image's **default username** — `ubuntu` for Ubuntu, `rocky` for Rocky Linux, `almalinux` for AlmaLinux, `centos` for CentOS Stream, `debian` for Debian.
+- The image's **default username** — `ubuntu` for Ubuntu, `almalinux` for AlmaLinux, `rocky` for Rocky Linux, `cloud-user` for CentOS Stream, `kali` for Kali. For images you uploaded yourself, check the image's **OS Admin** field.
 - A **security group** on the VM that allows inbound TCP 22 from your source. Without this, SSH will time out no matter what else is right. See [Security groups →](/networking/security-groups).
 
 ---

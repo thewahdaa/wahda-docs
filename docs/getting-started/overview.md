@@ -69,12 +69,12 @@ See [Projects →](/getting-started/projects-and-quotas) for how to create, swit
 
 | Service | What you get |
 |---|---|
-| **Compute** | Linux and Windows VMs. Standard, memory-optimized, and CPU-optimized shapes. |
+| **Compute** | Linux virtual machines. Four public flavor sizes (`m1.tiny` through `m1.large`); larger shapes available on request. |
 | **Block Storage** | Persistent SSD-backed volumes you attach to instances. Snapshots. |
 | **Object Storage** | S3-compatible bucket storage for unstructured data and static assets. |
 | **Networking** | Private networks, subnets, routers, security groups, floating (public) IPs. |
 | **Load Balancer** | Managed L4/L7 load balancing for HA services. |
-| **Databases (DBaaS)** | Managed MySQL/MariaDB with backups, replicas, and config groups. |
+| **Databases (DBaaS)** | Managed MySQL, MariaDB, and PostgreSQL with backups, replicas, and configuration groups. |
 | **Identity** | Users, projects, roles, application credentials, keypairs. |
 
 Each service has its own section in the sidebar. **Compute** and **Networking** are what most people touch first.
