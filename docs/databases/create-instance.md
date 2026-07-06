@@ -80,6 +80,12 @@ Include enough headroom for a full-size backup restore *plus* a few days of writ
 
 ## Step 2 — Networking
 
+:::note Verify field labels against your live wizard
+Steps 2 through 4 below describe the standard field set for the Create Database Instance wizard. Console UI details (exact labels, dropdown options, ordering) may vary slightly release-to-release. If a field name you see doesn't match this doc, follow the live wizard — it's the source of truth.
+:::
+
+
+
 Which private network the instance's endpoint will live on. This is a locked choice.
 
 | Field | Notes |

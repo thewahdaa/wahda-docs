@@ -147,6 +147,12 @@ Click **Next: Listener Detail**.
 
 ### Step 2 — Listener Detail
 
+:::note Verify field labels against your live wizard
+Steps 2 through 5 below describe the standard field set for the wizard. Console UI details (exact labels, dropdown options for optional fields, ordering) may vary slightly release-to-release. If a field name you see doesn't match this doc, follow the live wizard — it's the source of truth. Email **`info@thewahda.com`** if you spot a divergence and we'll update this page.
+:::
+
+
+
 A **listener** is the port the load balancer answers on. Configure:
 
 | Field | Notes |

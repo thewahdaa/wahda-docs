@@ -97,6 +97,12 @@ Application credentials are how you let a **script, CI job, cron task, or comman
 
 ### Creating one
 
+:::note Verify against your live console
+The exact menu path and field labels for creating an application credential may vary slightly between console releases. The flow described here follows the standard pattern; if what you see differs, follow the live UI and email **`info@thewahda.com`** if you spot a divergence.
+:::
+
+
+
 From the top-right avatar → **Application Credentials** → **Create**. Fill in:
 
 | Field | What to enter |

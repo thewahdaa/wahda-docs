@@ -112,6 +112,43 @@ On the row, select and click **Release** in the header. The IP goes back into th
 
 ---
 
+## Port forwarding — one FIP, many services
+
+If you have a single floating IP but multiple internal services on different VMs, **port forwarding** lets you expose each service on a different external port through the same FIP. No load balancer, no bastion — the router does the DNAT.
+
+Typical shape:
+
+- `165.99.104.42:80`   → `10.0.0.15:80`  (web VM)
+- `165.99.104.42:2222` → `10.0.0.16:22`  (bastion, SSH on a non-standard port)
+- `165.99.104.42:5432` → `10.0.0.17:5432` (dev database, restrict source CIDR!)
+
+Port forwarding is available on any allocated floating IP that **is not attached to a VM as a whole** — the FIP either forwards the whole address to one VM, or it forwards individual ports to different backends. Not both.
+
+### Fields per rule
+
+| Field | What it means |
+|---|---|
+| **Protocol** | `TCP` or `UDP`. |
+| **External port** | The port on the FIP you're exposing (e.g. `80`, `2222`, `5432`). Ranges (`8000:8010`) supported. |
+| **Internal IP** | The private address of the target VM on your project network. |
+| **Internal port** | The port on the VM (typically `80`, `22`, `5432`). Blank for the whole range if you used an external port range. |
+| **Description** | Optional — what the rule forwards to, useful once the list grows. |
+
+### When to use port forwarding vs. load balancer vs. bastion
+
+| Situation | Best tool |
+|---|---|
+| One public port, one backend VM | Attach the FIP whole to the VM. |
+| Multiple ports on one FIP, each to a different VM | Port forwarding. |
+| Multiple backends serving the same port (HA) | [Load balancer](/networking/load-balancer). |
+| Console-style SSH access to many private VMs | Bastion — see [Connect over SSH](/compute/connect-ssh#3-through-a-bastion-jump-host). |
+
+:::caution Port forwarding is a firewall bypass — restrict source CIDRs
+Every port you expose bypasses whatever security group is on the target VM's port. If you forward port 5432 to a database VM, **do not leave source-CIDR as `0.0.0.0/0`** — pin it to your office egress or your app tier's CIDR at minimum. The router-level rule is your only line of defence for that traffic.
+:::
+
+---
+
 ## Reverse DNS / PTR records
 
 By default, the reverse DNS for an FIP points at a generic hostname the platform owns. If you're running mail (SMTP) or anything else that checks PTR alignment, request a PTR record pointing at your domain — email **`info@thewahda.com`** with the FIP and the hostname you want.
