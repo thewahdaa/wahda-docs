@@ -243,7 +243,16 @@ const config: Config = {
           routeBasePath: '/',
           editUrl: undefined,
         },
-        blog: false,
+        blog: {
+          blogTitle: 'Blog',
+          blogDescription: 'News and updates from The Wahda Cloud',
+          showReadingTime: true,
+          feedOptions: {
+            type: ['rss', 'atom'],
+            title: 'The Wahda Cloud blog',
+          },
+          postsPerPage: 10,
+        },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -270,6 +279,11 @@ const config: Config = {
         src: 'img/brand/logo.svg',
       },
       items: [
+        {
+          to: '/blog',
+          label: 'Blog',
+          position: 'left',
+        },
         {
           type: 'docSidebar',
           sidebarId: 'docsSidebar',
