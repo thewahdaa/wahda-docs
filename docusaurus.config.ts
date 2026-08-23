@@ -50,14 +50,16 @@ const config: Config = {
         ],
         address: {
           '@type': 'PostalAddress',
-          addressLocality: 'Hyderabad',
-          addressRegion: 'Telangana',
+          streetAddress: '297 Sector 30',
+          addressLocality: 'Faridabad',
+          addressRegion: 'Haryana',
+          postalCode: '121003',
           addressCountry: 'IN',
         },
         geo: {
           '@type': 'GeoCoordinates',
-          latitude: 17.3850,
-          longitude: 78.4867,
+          latitude: 28.4089,
+          longitude: 77.3178,
         },
         areaServed: {
           '@type': 'Country',
