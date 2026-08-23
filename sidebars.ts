@@ -26,6 +26,17 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
+      label: 'Kubernetes',
+      collapsed: true,
+      items: [
+        'kubernetes/overview',
+        'kubernetes/create-cluster',
+        'kubernetes/node-pools',
+        'kubernetes/networking',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Networking',
       collapsed: true,
       items: [
