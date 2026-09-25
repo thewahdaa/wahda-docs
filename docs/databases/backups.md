@@ -105,7 +105,7 @@ Once the new instance is `ACTIVE`:
 4. Once traffic is stable, decide the fate of the original — keep it briefly for forensics, or delete it from **Databases → Instances** so you stop paying for two.
 
 :::caution Same engine and version
-A backup can only be restored into an instance running the **same datastore and version** it came from. A MySQL 8.4 backup cannot restore into MySQL 8.0. To change engine version, restore into the same version, then use logical dump/load to move to the target version.
+A backup can only be restored into an instance running the **same datastore and version** it came from. A MySQL 8.4 backup cannot restore into MySQL 8.0.
 :::
 
 ---
@@ -130,17 +130,6 @@ You want a copy of production data (or a subset) to test against.
 2. Restore it into a new instance in your staging network.
 3. Redact / mask sensitive data in the clone before you let staging users touch it.
 4. Delete the clone (and the on-demand backup) when you're done.
-
-### Version upgrade (major)
-
-The service doesn't do in-place major-version upgrades. To move a workload from PostgreSQL 16 to 18, or MySQL 8.0 to 8.4:
-
-1. Create a new instance on the target version, empty.
-2. Use engine-native logical dump/load — `pg_dump` / `pg_restore` for PostgreSQL, `mysqldump` for MySQL/MariaDB — to move schema and data.
-3. Validate.
-4. Cut the app over. Keep the old instance for a few days, then delete.
-
-For minor version upgrades within the same major, the platform handles patches transparently.
 
 ### Duplicate an instance for a load test
 

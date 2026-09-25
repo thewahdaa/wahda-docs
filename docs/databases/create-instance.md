@@ -30,7 +30,7 @@ Have these ready — the wizard is short but it doesn't let you jump back to fix
 
 | You need | Why |
 |---|---|
-| **The engine and version** | MySQL `8.0`/`8.4`, MariaDB `11.4`, PostgreSQL `16`/`17`/`18`. Locked once the instance is created — a version change means restoring a backup into a new instance. See [Overview](/databases/overview#supported-engines-and-versions). |
+| **The engine and version** | MySQL `8.0`/`8.4`, MariaDB `11.4`, PostgreSQL `16`/`17`/`18`. Locked once the instance is created — there is no version change afterwards, so pick the version you want to stay on. See [Overview](/databases/overview#supported-engines-and-versions). |
 | **A flavor** | `m1.small`, `m1.medium`, `m1.largex` or `m1.large`. Fixed for the life of the instance. See [Overview → Flavor guide](/databases/overview#flavor-guide). |
 | **A private network** | The instance will get its address here. Put it on the same private network as the app VMs that will talk to it, so traffic never leaves the private plane. |
 | **A first database name and user** | You'll create the first application user during the wizard. Extra users and databases can be added later from the instance detail page. |

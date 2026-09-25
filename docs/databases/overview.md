@@ -60,7 +60,7 @@ Only the versions listed here are supported. Older or newer releases are not exp
 | **PostgreSQL** | `17` | Newer stable — improvements in vacuum, logical replication, `EXPLAIN`. |
 | **PostgreSQL** | `18` | Latest. Pick this if you want the freshest optimizer and want to stay on a version with the longest remaining support window. |
 
-Once you pick an engine + version pair, that pair is fixed for the life of the instance. Version upgrades are handled by restoring a backup into a new instance on the target version and cutting over — see [Backups & restore](/databases/backups).
+Once you pick an engine + version pair, that pair is fixed for the life of the instance — there is no version upgrade inside the service. Pick the version you want to stay on.
 
 ---
 

@@ -48,7 +48,7 @@ Long dashboard queries, weekly reports, or a BI tool pulling large scans starve 
 
 Product catalogs, search-adjacent lookups, feed reads — anything read-mostly can go to a replica behind a small "read from replica when possible" wrapper in your app. Add replicas one at a time as read load grows.
 
-### 3. Staging a version upgrade or big migration
+### 3. Staging a big migration
 
 A replica gives you an isolated place to run heavy verification queries against real production data without touching the primary. You can add one, run the reads, and delete it when you're done.
 
