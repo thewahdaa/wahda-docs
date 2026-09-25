@@ -32,9 +32,9 @@ Groups are how you tune performance, raise connection ceilings, and enforce cons
 | **Configuration group** | A named set of `parameter = value` pairs for a specific datastore + version. |
 | **Datastore-scoped** | A group is bound to exactly one datastore + version. A `mysql 8.4` group cannot be attached to a `mysql 8.0` instance, and vice versa. |
 | **Parameter** | A single engine setting. Each datastore exposes a curated list of tunable parameters — the console shows only the ones the platform allows you to change. |
-| **Attach** | Bind a group to an instance. Some parameters apply live; others require a restart of the instance (the console tells you which). |
-| **Detach** | Unbind a group from an instance. The instance falls back to platform defaults. |
-| **Values tab** | Where you edit parameter values inside the group. |
+| **Attach** | Bind a group to an instance (**Manage Configuration Group** on the instance). Some parameters apply live; others need a restart, and the instance's status says so. |
+| **Detach** | Unbind a group from an instance — same action, pick **None**. The instance falls back to platform defaults. |
+| **Values tab** | Where you add and remove the group's parameters. |
 
 :::caution Scoped, not portable
 Because groups are tied to a datastore + version pair, you can't reuse a `postgresql 16` group on a `postgresql 17` instance. Make one group per (datastore, version) you run.
@@ -75,41 +75,43 @@ Columns:
 
 | Column | Meaning |
 |---|---|
-| **Name** | The group's label — `mysql-prod-tuned`, `pg17-analytics`. |
-| **Datastore / Version** | The engine + version this group is bound to. |
+| **Configuration Group ID/Name** | The group's label — `mysql-prod-tuned`, `pg17-analytics`. Click it to open the group. |
 | **Description** | Optional one-liner. |
-| **Attached Instances** | How many instances currently use this group. |
-| **Created** | Creation timestamp. |
+| **Datastore** / **Datastore Version** | The engine + version this group is bound to. |
+
+Which instances use a group is on the group's own **Instances** tab.
 
 ---
 
 ## Create a configuration group
 
-1. Click **Create Configuration Group** at the top of the list.
+1. Click **Create Configurations** at the top of the list.
 2. Fill in the form:
 
 | Field | Notes |
 |---|---|
 | **Name** | Recognizable label — `mysql84-prod`, `pg17-tuned-4gb`. Include the datastore, version, and role. |
 | **Description** | Optional. One line explaining what this group is for and who owns it. |
-| **Datastore** | `mysql`, `mariadb`, `postgresql`. |
+| **Datastore Type** | `mysql`, `mariadb`, `postgresql`. |
 | **Datastore Version** | The versions available for the datastore you picked. |
 
-3. Click **Create**. The group opens with an empty parameter list.
+3. Click **Confirm**. The group is created with an empty parameter list.
 
-Now switch to the **Values** tab to add parameters.
+Now open the group and switch to its **Values** tab to add parameters.
 
 ---
 
 ## Add and edit parameters
 
-Inside the group, the **Values** tab lists every parameter the platform allows you to tune for this datastore + version.
+Inside the group, the **Values** tab lists the parameters you have set so far (**Name**, **Value**). It starts empty.
 
-For each parameter you want to change:
+For each parameter you want to set:
 
-1. Find it in the list (search by name — `innodb_buffer_pool_size`, `max_connections`, `shared_buffers`).
-2. Enter a value in its right-hand cell. The console validates the type and range — it will not let you save `abc` in an integer field, or a value outside the allowed range for a parameter with hard bounds.
-3. Save.
+1. Click **Add Parameter**.
+2. Pick the parameter from the **Name** dropdown — it lists only the parameters the platform lets you tune for this datastore + version (`innodb_buffer_pool_size`, `max_connections`, `shared_buffers`, …). If the parameter needs a restart to take effect, the form says so.
+3. Enter the **Value** and click **Confirm**.
+
+To change a value, remove the parameter (row action **Delete**) and add it again with the new value.
 
 A short list of "if in doubt, tune these first" parameters by engine:
 
@@ -134,30 +136,32 @@ A short list of "if in doubt, tune these first" parameters by engine:
 | `maintenance_work_mem` | Memory for `VACUUM`, `CREATE INDEX`, `ALTER TABLE`. | `256MB`–`1GB`. Bigger helps big-table operations finish faster. |
 | `log_min_duration_statement` | Log queries slower than N ms — like MySQL's slow log. | `1000` (1 second) to start; drop lower once things quiet down. |
 
-The console shows the default value, the value in the group, and (when attached) the live value on the instance. Save moves the group's value to what you set; **apply** happens when the group is attached and the instance is restarted if needed.
+Setting a value in the group changes nothing by itself — **apply** happens when the group is attached to an instance, and for restart-required parameters, when that instance is restarted.
 
 ---
 
 ## Attach a group to an instance
 
-1. Open **Databases → Instances**, click into the instance.
-2. Open its **Configuration** tab (or use the action menu → **Attach Configuration Group**).
-3. Pick a group from the dropdown. Only groups matching the instance's datastore + version appear.
-4. Save.
+1. Open **Databases → Instances**.
+2. Open the instance's row action menu and choose **Configuration Update → Manage Configuration Group**.
+3. Pick a group from the **Configuration Group** dropdown. Only groups matching the instance's datastore + version appear.
+4. Click **Confirm**.
 
-The instance moves to `PENDING` briefly while the platform applies the parameters. Parameters that can be applied at runtime take effect immediately; parameters that need a restart (labeled in the parameter list) require the instance to restart before they're live.
+Parameters that can be applied at runtime take effect right away. If the group contains a restart-required parameter, the instance's status changes to **`RESTART_REQUIRED`** and stays there until you restart it: row action menu → **Database Instance Status → Restart**.
 
 :::tip Restart timing
-When you attach a group with restart-required parameters, the console prompts you to restart the instance. On production, do this in a maintenance window — a restart drops connections briefly and applications need to reconnect.
+On production, do the restart in a maintenance window — it drops connections briefly and applications need to reconnect.
 :::
+
+You can also attach a group at creation time, in the wizard's **Advanced** step.
 
 ---
 
 ## Detach a group
 
-1. Open the instance's **Configuration** tab.
-2. Click **Detach**.
-3. Confirm.
+1. Open the instance's row action menu → **Configuration Update → Manage Configuration Group**.
+2. Pick **None (detach configuration group)**.
+3. Click **Confirm**.
 
 The instance falls back to platform defaults. As with attach, restart-required parameters need a restart to fully revert.
 
@@ -224,10 +228,10 @@ Every instance in each environment attaches its environment's group. Changes are
 | Symptom | Where to look |
 |---|---|
 | The group doesn't appear when attaching | The group's datastore + version don't match the instance's. Check both. |
-| Parameter change didn't take effect | It's a restart-required parameter and the instance hasn't restarted. Restart from the instance detail page. |
+| Parameter change didn't take effect | It's a restart-required parameter and the instance hasn't restarted — its status shows `RESTART_REQUIRED`. Restart it from the row action menu. |
 | Instance went to `ERROR` after applying a group | A value outside the safe operating range for the flavor (e.g. `innodb_buffer_pool_size` larger than the instance's RAM). Detach the group, restart the instance, edit the group's values back to sane numbers, re-attach. |
-| Values tab is empty | New group — you haven't set any parameters yet. Add them from the Values tab. |
-| Live value on the instance doesn't match the group | The group has been edited since attach and the instance hasn't restarted, or a restart-required parameter was changed. Restart to reconcile. |
+| Values tab is empty | New group — you haven't set any parameters yet. Click **Add Parameter**. |
+| Instance shows `RESTART_REQUIRED` | A restart-required parameter was applied. Restart the instance (**Database Instance Status → Restart**) when convenient. |
 
 ---
 

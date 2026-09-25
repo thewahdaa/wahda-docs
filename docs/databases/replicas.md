@@ -29,8 +29,8 @@ The Wahda Cloud lets you add a replica to any running MySQL, MariaDB, or Postgre
 | Yes | No |
 |---|---|
 | A read-only copy of the primary, kept in sync by async replication. | A synchronous multi-writer cluster — writes still only go to the primary. |
-| Its own instance with its own endpoint, flavor, and storage. | A snapshot — replicas are live, not a point in time. |
-| Independently sizable — bigger replica than primary is fine. | Independently schemable — schema comes from the primary. |
+| Its own instance with its own endpoint and storage, created with the primary's flavor and disk size. | A snapshot — replicas are live, not a point in time. |
+| Removable, and resizable on disk later like any instance. | Independently schemable — schema comes from the primary. |
 | Removable at any time without affecting the primary. | An automatic-failover cluster. Promoting a replica today is a manual action. |
 | A useful staging ground for a future primary via promotion. | A backup — replicas replicate deletes too. Don't skip [Backups & restore](/databases/backups). |
 
@@ -60,47 +60,41 @@ Keep a replica running as a warm standby. If the primary is lost, promote the re
 
 ## What replicas cost
 
-A replica is a **separate managed database instance**, billed the same as the primary:
-
-- Its own flavor (`m1.small` / `m1.medium` / `m1.large`) — pick independently of the primary.
-- Its own storage — sized independently, but you can't go below what the replicated data needs.
-- Its own hour meter, in INR with GST.
-
-A common shape is **primary on `m1.large`, replica on `m1.medium`** for analytics that don't need the full primary's headroom; **primary on `m1.medium`, replica on `m1.medium`** for a warm standby you'd promote in a pinch.
+A replica is a **separate managed database instance**, billed the same as the primary — its own hour meter, in INR with GST. It is created with the **same flavor and the same disk size as the primary** (both are inherited, not chosen), so budget a replica as a second copy of the primary's hourly rate.
 
 ---
 
 ## Add a replica through the console
 
-Open **Databases → Instances**. Find the primary you want to replicate.
+A replica is created through the same wizard as any instance. Open **Databases → Instances** and click **Create Database Instance**.
 
 <MacFrame
   src="/img/screenshots/databases/instances-list.png"
   alt="Database Instances list"
   title="Databases › Instances"
-  caption="The Instances list. The primary is the instance you'll replicate from."
+  caption="The Instances list. The Role and Master columns show which instances are primaries and which are replicas."
 />
 
-Click the row's action menu (or open the instance detail page) and choose **Create Replica**. A short wizard opens.
+**Step 1 — Details**
 
 | Field | Notes |
 |---|---|
-| **Name** | Recognizable label — `app-prod-mysql-replica-1`, `pg17-analytics-read`. Include the role in the name; you'll thank yourself in six months. |
-| **Datastore / version** | Locked to match the primary. |
-| **Flavor** | Pick independently. Sizing up is easy later; sizing down forces a rebuild. |
-| **Volume Size** | Must be at least as large as the primary's used storage. Bigger is fine. |
-| **Network / Subnet** | Defaults to the primary's network so replication traffic never leaves the private plane. Leave it unless you have a specific reason to change. |
-| **Configuration Group** | Optional. If the primary has a config group, a replica typically inherits its intent — you can attach one here or later. See [Configuration groups](/databases/config-groups). |
+| **Database Instance Name** | Recognizable label — `app-prod-mysql-replica-1`, `pg17-analytics-read`. Include the role in the name; you'll thank yourself in six months. |
+| **Instance Type** | Switch from `Standalone` to **`Replica`**. |
+| **Master Instance** | Pick the primary to replicate from. Datastore, version, flavor and disk size are inherited from it — the wizard hides those fields for a replica. |
 
-Click **Create**. The replica moves through:
+**Step 2 — Networking** — pick the private network. The primary's network is the normal choice, so replication traffic never leaves the private plane.
 
-1. **`BUILD`** — the platform provisions the replica VM.
-2. **`BACKUP` / `RESTORE_BACKUP`** — the platform takes a base snapshot of the primary and restores it into the replica.
-3. **`ACTIVE`** — the replica is caught up and streaming.
+**Steps 3 and 4** (initial database and user, configuration group, locality) don't apply to a replica: it copies the primary's data, users and schema. Click **Create**.
+
+The replica moves through:
+
+1. **`BUILD`** — the platform provisions the replica and takes a base copy of the primary.
+2. **`ACTIVE`** — the replica is caught up and streaming.
 
 The whole flow takes minutes for a small database, longer for a large one — mostly the base copy phase, which scales with data size.
 
-Once `ACTIVE`, the replica's detail page shows a **Replica of** field pointing at the primary, and its own private endpoint you can connect to.
+Once `ACTIVE`, the replica's detail page has a **Replication** section showing **Role** (`replica`), its **Master**, and — on the primary's page — the list of **Replicas**. The **Connection Information** section gives the replica's own private endpoint.
 
 ---
 
@@ -133,7 +127,7 @@ SELECT * FROM repl_check;
 
 If the `ts` on the replica matches (within lag) what you wrote on the primary, replication is live.
 
-To watch replication status from the console, open the replica's detail page — the **Replica of** and status fields update as the platform monitors the stream.
+To check the topology from the console, open either instance's detail page — the **Replication** section shows the role, the master, and the replicas.
 
 ---
 
@@ -158,7 +152,6 @@ The replica trails the primary by a small window. Under normal load that's fract
 - A burst of writes on the primary the replica hasn't caught up on.
 - A large schema change (`ALTER TABLE`, `CREATE INDEX`) — the replica may pause while it applies the change.
 - A network hiccup between primary and replica (rare on the private plane).
-- The replica running on smaller hardware than the primary and being CPU- or I/O-bound.
 
 Design read-from-replica code to tolerate seconds of staleness. If a specific query must be perfectly fresh — "did the write I just made land?" — send it to the primary.
 
@@ -195,7 +188,7 @@ If your workload needs any of those before we ship them, run the DB yourself on 
 | Symptom | Where to look |
 |---|---|
 | Replica stuck in `BUILD` | Large primary — the base copy takes time. If it doesn't reach `ACTIVE` after an hour, email **`info@thewahda.com`** with both instance IDs. |
-| Replication lag growing without bound | Replica flavor too small for the primary's write rate, or an expensive `ALTER` is being replayed. Size the replica up, or wait out the schema change. |
+| Replication lag growing without bound | A write burst the replica hasn't caught up on, or an expensive `ALTER` being replayed. Wait it out; if it never catches up, delete the replica and create a new one. |
 | Replica went to `ERROR` state | Something broke the stream — typically a schema-affecting event applied out of order. Delete the replica and create a new one; the base copy will re-sync from the primary. |
 | App writing to the replica's endpoint | Engine will reject with a read-only error. Fix the connection string / pool routing in the app. |
 | Reports show data missing rows the primary has | Replica lag. Either wait, run the report on the primary during off-hours, or add a `WHERE created_at < now() - interval '30 seconds'` guard. |
@@ -204,7 +197,7 @@ If your workload needs any of those before we ship them, run the DB yourself on 
 
 ## Next steps
 
-- [Backups & restore →](/databases/backups) — a replica is not a backup. Set up automated backups too.
-- [Configuration groups →](/databases/config-groups) — tune the replica for read-heavy workloads (bigger buffer pool, different `work_mem`).
+- [Backups & restore →](/databases/backups) — a replica is not a backup. Take backups too.
+- [Configuration groups →](/databases/config-groups) — attach a read-tuned group to the replica after it's `ACTIVE` (bigger buffer pool, different `work_mem`).
 - [Overview →](/databases/overview) — the full picture of the managed database service.
 - [Create a VM →](/compute/create-vm) — the app or BI server that will consume the replica.
