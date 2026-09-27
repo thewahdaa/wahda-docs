@@ -147,10 +147,10 @@ Setting a value in the group changes nothing by itself — **apply** happens whe
 3. Pick a group from the **Configuration Group** dropdown. Only groups matching the instance's datastore + version appear.
 4. Click **Confirm**.
 
-Parameters that can be applied at runtime take effect right away. If the group contains a restart-required parameter, the instance's status changes to **`RESTART_REQUIRED`** and stays there until you restart it: row action menu → **Database Instance Status → Restart**.
+Attaching a group does not restart anything by itself. Parameters that can be applied at runtime take effect right away. If the group contains a restart-required parameter, the new value is written to the engine's configuration and the instance's status changes to **`RESTART_REQUIRED`** — a reminder, not an action: the database keeps running on the old value until you choose the moment and restart it: row action menu → **Database Instance Status → Restart**.
 
-:::tip Restart timing
-On production, do the restart in a maintenance window — it drops connections briefly and applications need to reconnect.
+:::tip Restart is the database service, not the server
+**Restart** restarts only the database engine inside the instance — a few seconds of dropped connections, the server itself stays up and its address, storage and backups are untouched. On production, do the restart in a maintenance window so applications reconnect on your schedule.
 :::
 
 You can also attach a group at creation time, in the wizard's **Advanced** step.
