@@ -31,7 +31,7 @@ Have these ready — the wizard is short but it doesn't let you jump back to fix
 | You need | Why |
 |---|---|
 | **The engine and version** | MySQL `8.0`/`8.4`, MariaDB `11.4`, PostgreSQL `16`/`17`/`18`. Locked once the instance is created — there is no version change afterwards, so pick the version you want to stay on. See [Overview](/databases/overview#supported-engines-and-versions). |
-| **A flavor** | `m1.small`, `m1.medium`, `m1.largex` or `m1.large`. Fixed for the life of the instance. See [Overview → Flavor guide](/databases/overview#flavor-guide). |
+| **A flavor** | `m1.small`, `m1.medium`, `m1.largex` or `m1.large`. Changeable later, at the cost of a few minutes of downtime. See [Overview → Flavor guide](/databases/overview#flavor-guide). |
 | **A private network** | The instance will get its address here. Put it on the same private network as the app VMs that will talk to it, so traffic never leaves the private plane. |
 | **A first database name and user** | You'll create the first application user during the wizard. Extra users and databases can be added later from the instance detail page. |
 | **A strong password** | Written down somewhere safe. The console will not let you retrieve it later — you'll have to reset it. |
@@ -70,7 +70,7 @@ Click **Create Database Instance** in the top-left.
 | **Database Disk (GiB)** | The dedicated persistent storage for the database files. Include headroom for a full backup restore plus write growth (see the tip below). You can grow the disk later; you can't shrink it. |
 | **Datastore Type** | `mysql`, `mariadb`, or `postgresql`. Locked after creation. |
 | **Datastore Version** | The supported versions for the datastore you picked. `8.0` or `8.4` for MySQL; `11.4` for MariaDB; `16`, `17`, or `18` for PostgreSQL. Also locked. |
-| **Database Flavor** | `m1.small` / `m1.medium` / `m1.largex` / `m1.large`. Filter with the tabs (`All Flavors`, `X86 Architecture`, `Heterogeneous Computing`, `Custom`). The flavor is fixed after creation — only the disk can be grown later — so size for the workload you expect, not the one you have today. |
+| **Database Flavor** | `m1.small` / `m1.medium` / `m1.largex` / `m1.large`. Filter with the tabs (`All Flavors`, `X86 Architecture`, `Heterogeneous Computing`, `Custom`). You can change it later with **Resize Flavor**, but that restarts the database (see [below](#resize-the-flavor-later)), so size for the workload you expect. |
 
 :::tip Sizing storage
 Include enough headroom for a full-size backup restore *plus* a few days of write growth. If your working set is 30 GB and grows at 1 GB/day, 40 GB will be tight in a month — pick 80. Growing later is cheap; running out at 2am isn't.
@@ -173,6 +173,18 @@ You should see the engine version you picked and the current server time.
 - **Take a [backup](/databases/backups)** right now, and decide how often you'll take one. A production database with no proven backup path is a foot-gun.
 - **Consider a [read replica](/databases/replicas)** if you'll ever have analytics or reporting queries competing with your app's writes.
 - **Wire your app** to the endpoint. Store the endpoint, port, database name, user and password in your app's secret manager — never in source.
+
+---
+
+## Resize the flavor later
+
+Outgrew `m1.medium`? Open **Databases → Instances**, the instance's row action menu → **Configuration Update → Resize Flavor**, pick the new flavor and confirm.
+
+:::caution This is a restart, not a live change
+A flavor change stops the database, resizes the server underneath it through the compute layer (a shutdown and a boot with the new flavor), then starts the database again and waits for it to report healthy. **Expect a few minutes without connections.** The instance shows `RESIZE` while this happens and returns to `ACTIVE` when done. Do it in a maintenance window, and make sure your app reconnects on its own rather than failing hard. Managed database services elsewhere work the same way — an instance-class change is always a restart.
+:::
+
+Only the flavor changes; the data, the endpoint address, users, databases and the attached configuration group all stay as they are. To grow the disk instead, use **Configuration Update → Resize Volume** — the disk is extended in place and the database keeps serving.
 
 ---
 

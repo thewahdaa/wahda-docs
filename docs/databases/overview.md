@@ -73,7 +73,7 @@ Once you pick an engine + version pair, that pair is fixed for the life of the i
 | `m1.largex` | 4 | 4 GB | CPU-heavy but memory-light workloads. |
 | `m1.large` | 4 | 8 GB | Serious production workloads — a busy web app's primary store, an analytics warehouse. |
 
-The database disk is **not** part of the flavor — you set **Database Disk (GiB)** separately in the wizard and can grow it later.
+The database disk is **not** part of the flavor — you set **Database Disk (GiB)** separately in the wizard and can grow it later. The flavor itself can be changed later too (**Resize Flavor**), but that restarts the database and the server underneath it — see [Resize the flavor later](/databases/create-instance#resize-the-flavor-later).
 
 :::caution `m1.tiny` is not a database flavor
 `m1.tiny` (2 vCPU / 512 MB / 1 GB) is fine for a cirros smoke-test VM but has neither the RAM nor the disk to run a real database. Start at `m1.small`.
