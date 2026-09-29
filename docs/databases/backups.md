@@ -97,7 +97,7 @@ Restore does not overwrite the source instance. It provisions a **new** managed 
 | **Database Flavor** | Pre-filled with the original's flavor. Choose a larger one if the restored copy will carry more load. |
 | **Database Disk (GiB)** | Pre-filled with the original's disk size, which is the minimum: the restored data has to fit. Larger is fine, smaller is not. |
 | **Network** | The private network the new instance's address will live on. Normally the same one as the original, so your application servers reach it without a routing change. |
-| **After Restore** | A single checkbox that deletes the original once the restored instance reports `ACTIVE`. Off by default, and it should usually stay off. See below. |
+| **After Restore** | One checkbox, **Delete the original instance once the restored instance is ACTIVE**. Unchecked by default, and it should usually stay that way. It is shown only while the original still exists. See below. |
 
 The new instance appears in **Databases → Instances** and moves from `BUILD` to `ACTIVE`. How long that takes scales with the size of the data.
 
@@ -115,7 +115,7 @@ Do these in order, and keep the original until the last step.
 4. Stop writes to the original, point the application's connection string at the new address, and roll the application.
 5. Only when traffic is stable and you trust the data, delete the original from **Databases → Instances** so you stop paying for two.
 
-The **After Restore** checkbox automates step 5 and skips steps 2 to 4, which is why it is off by default. A restore is usually a copy taken to recover a few rows or to try something on real data, and until you have looked at the restored data the original is your only way back. Turn it on only when the original is already unusable. Nothing is deleted if the restore fails, and an original that still has read replicas is never deleted.
+Checking **Delete the original instance once the restored instance is ACTIVE** automates step 5 and skips steps 2 to 4, which is why it is unchecked by default. A restore is usually a copy taken to recover a few rows or to try something on real data, and until you have looked at the restored data the original is your only way back. Turn it on only when the original is already unusable. Nothing is deleted if the restore fails, and an original that still has read replicas is never deleted.
 
 :::caution Same engine and version
 A backup can only be restored into an instance running the **same datastore and version** it came from. A MySQL 8.4 backup cannot restore into MySQL 8.0.
