@@ -85,24 +85,37 @@ A backup can only be restored into the same engine and version it came from — 
 
 ## Restore to a new instance
 
-Restore does not overwrite the source instance. It provisions a **new** managed database instance seeded from the backup you pick. The original keeps running — with its data and endpoint — until you delete it.
+Restore does not overwrite the source instance. It provisions a **new** managed database instance seeded from the backup you pick. The original keeps running, with its data and its address, until you delete it yourself.
 
-:::info Restore is done by our team today
-Self-service restore from the console is on its way. Until it ships, email **`info@thewahda.com`** with:
+1. Go to **Databases → Backups**.
+2. Find the backup: the newest `COMPLETED` one before the incident, or the backup you took on purpose. **Restore** is offered only on `COMPLETED` backups.
+3. Click **Restore** and fill in **Restore to New Instance**.
 
-- the backup's **Name** (from **Databases → Backups**) — the newest `COMPLETED` one before the incident, or the backup you took on purpose;
-- the **name** you want for the restored instance;
-- the **private network** it should live on (normally the same one as the original, so your app VMs reach it without any routing change).
+| Field | What to put |
+|---|---|
+| **New Instance Name** | Pre-filled as `<original>-restored`. If this restore is a replacement, give it the name the application will use from now on. |
+| **Database Flavor** | Pre-filled with the original's flavor. Choose a larger one if the restored copy will carry more load. |
+| **Database Disk (GiB)** | Pre-filled with the original's disk size, which is the minimum: the restored data has to fit. Larger is fine, smaller is not. |
+| **Network** | The private network the new instance's address will live on. Normally the same one as the original, so your application servers reach it without a routing change. |
+| **After Restore** | A single checkbox that deletes the original once the restored instance reports `ACTIVE`. Off by default, and it should usually stay off. See below. |
 
-We restore it into a new instance in your project and confirm when it is `ACTIVE`.
+The new instance appears in **Databases → Instances** and moves from `BUILD` to `ACTIVE`. How long that takes scales with the size of the data.
+
+:::caution The restored instance has its own address
+A restore never reuses the original's address. The new instance gets a new one, so the application has to be pointed at it. Renaming an instance does not move its address. Plan the cutover before you start.
 :::
 
-Once the new instance is `ACTIVE`:
+### Cutting over to the restored instance
 
-1. Connect and sanity-check the data — count key tables, spot-check recent rows, run the app's health checks against the new endpoint.
-2. Update your app's connection string to point at the new instance's endpoint and roll the app.
-3. Re-attach the [configuration group](/databases/config-groups) the original used — group attachments are not carried by a backup.
-4. Once traffic is stable, decide the fate of the original — keep it briefly for forensics, or delete it from **Databases → Instances** so you stop paying for two.
+Do these in order, and keep the original until the last step.
+
+1. Wait for the new instance to reach `ACTIVE`.
+2. Connect to it and check the data. Count the rows in the tables you care about, spot-check the most recent records, and run the application's own health checks against it.
+3. Re-attach the [configuration group](/databases/config-groups) the original used. A backup does not carry the group attachment.
+4. Stop writes to the original, point the application's connection string at the new address, and roll the application.
+5. Only when traffic is stable and you trust the data, delete the original from **Databases → Instances** so you stop paying for two.
+
+The **After Restore** checkbox automates step 5 and skips steps 2 to 4, which is why it is off by default. A restore is usually a copy taken to recover a few rows or to try something on real data, and until you have looked at the restored data the original is your only way back. Turn it on only when the original is already unusable. Nothing is deleted if the restore fails, and an original that still has read replicas is never deleted.
 
 :::caution Same engine and version
 A backup can only be restored into an instance running the **same datastore and version** it came from. A MySQL 8.4 backup cannot restore into MySQL 8.0.
@@ -167,9 +180,9 @@ A rough rule of thumb: budget one backup's worth of object storage for every bac
 |---|---|
 | Backup stuck in `BUILDING` for a long time | Large instance under heavy write load. Wait it out; if it hasn't reached `COMPLETED` after several hours, email **`info@thewahda.com`** with the backup ID. |
 | Backup `FAILED` | Retake it. If it keeps failing, email support with the backup and instance IDs. Do not rely on a `FAILED` backup as an actual restore target. |
-| Restored instance stuck in `BUILD` | Same shape as create-instance: usually resolves in minutes; if it's past 30 minutes, reply on your restore request with the instance ID. |
+| Restored instance stuck in `BUILD` | Same shape as create-instance: it usually clears in minutes. If it is past 30 minutes, email support with the instance ID. |
 | Restored instance is missing recent rows | Restore is only as fresh as the backup you picked. Check the backup's creation time against when the incident happened — and take backups more often if that gap hurts. |
-| Need a restore | Email **`info@thewahda.com`** with the backup name — see [Restore to a new instance](#restore-to-a-new-instance). Only `COMPLETED` backups can be restored. |
+| **Restore** missing on a backup | The action is offered only on `COMPLETED` backups. A `FAILED` or still-running backup cannot be restored. |
 | Old backups piling up | Nothing deletes them automatically. Prune from the Backups list. |
 
 ---
